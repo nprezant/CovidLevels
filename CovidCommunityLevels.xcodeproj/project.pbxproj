@@ -14,6 +14,12 @@
 		4F5F044D2824537300FE9A1D /* CovidCommunityLevelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F044C2824537300FE9A1D /* CovidCommunityLevelsTests.swift */; };
 		4F5F04572824537300FE9A1D /* CovidCommunityLevelsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04562824537300FE9A1D /* CovidCommunityLevelsUITests.swift */; };
 		4F5F04592824537300FE9A1D /* CovidCommunityLevelsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04582824537300FE9A1D /* CovidCommunityLevelsUITestsLaunchTests.swift */; };
+		4F5F04A728257CB600FE9A1D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04A628257CB600FE9A1D /* CardView.swift */; };
+		4F5F04A928257D2200FE9A1D /* CommunityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04A828257D2200FE9A1D /* CommunityData.swift */; };
+		4F5F04AB2825830C00FE9A1D /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04AA2825830C00FE9A1D /* PageView.swift */; };
+		4F5F04AD28258AC500FE9A1D /* HistoricalCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04AC28258AC500FE9A1D /* HistoricalCardView.swift */; };
+		4F5F04AF2825908700FE9A1D /* CommunityDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04AE2825908700FE9A1D /* CommunityDetailsView.swift */; };
+		4F5F04B1282591B100FE9A1D /* DetailItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04B0282591B100FE9A1D /* DetailItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +50,12 @@
 		4F5F04522824537300FE9A1D /* CovidCommunityLevelsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CovidCommunityLevelsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F5F04562824537300FE9A1D /* CovidCommunityLevelsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidCommunityLevelsUITests.swift; sourceTree = "<group>"; };
 		4F5F04582824537300FE9A1D /* CovidCommunityLevelsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidCommunityLevelsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4F5F04A628257CB600FE9A1D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		4F5F04A828257D2200FE9A1D /* CommunityData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityData.swift; sourceTree = "<group>"; };
+		4F5F04AA2825830C00FE9A1D /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
+		4F5F04AC28258AC500FE9A1D /* HistoricalCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalCardView.swift; sourceTree = "<group>"; };
+		4F5F04AE2825908700FE9A1D /* CommunityDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityDetailsView.swift; sourceTree = "<group>"; };
+		4F5F04B0282591B100FE9A1D /* DetailItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +108,12 @@
 			children = (
 				4F5F043B2824537100FE9A1D /* CovidCommunityLevelsApp.swift */,
 				4F5F043D2824537100FE9A1D /* ContentView.swift */,
+				4F5F04A628257CB600FE9A1D /* CardView.swift */,
+				4F5F04AC28258AC500FE9A1D /* HistoricalCardView.swift */,
+				4F5F04AA2825830C00FE9A1D /* PageView.swift */,
+				4F5F04A828257D2200FE9A1D /* CommunityData.swift */,
+				4F5F04AE2825908700FE9A1D /* CommunityDetailsView.swift */,
+				4F5F04B0282591B100FE9A1D /* DetailItemView.swift */,
 				4F5F043F2824537300FE9A1D /* Assets.xcassets */,
 				4F5F04412824537300FE9A1D /* Preview Content */,
 			);
@@ -257,7 +275,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F5F04AF2825908700FE9A1D /* CommunityDetailsView.swift in Sources */,
+				4F5F04AB2825830C00FE9A1D /* PageView.swift in Sources */,
 				4F5F043E2824537100FE9A1D /* ContentView.swift in Sources */,
+				4F5F04AD28258AC500FE9A1D /* HistoricalCardView.swift in Sources */,
+				4F5F04B1282591B100FE9A1D /* DetailItemView.swift in Sources */,
+				4F5F04A728257CB600FE9A1D /* CardView.swift in Sources */,
+				4F5F04A928257D2200FE9A1D /* CommunityData.swift in Sources */,
 				4F5F043C2824537100FE9A1D /* CovidCommunityLevelsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -425,13 +449,14 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hello.CovidCommunityLevels;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -454,13 +479,14 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hello.CovidCommunityLevels;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
