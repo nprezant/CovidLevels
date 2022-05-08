@@ -8,39 +8,50 @@
 import SwiftUI
 
 struct PageView: View {
-    let commData: CommunityData
+    let comm: CommunityData
+    let trans: TransmissionData
     var body: some View {
         VStack {
-            Text("\(commData.county), \(commData.state)")
+            Text("\(comm.county), \(comm.state)")
                 .font(.title3)
             Spacer()
                 .frame(height: 10)
             HStack {
                 Spacer()
                 VStack {
-                    Text(commData.level.uppercased())
+                    Text(comm.level.uppercased())
                         .font(.largeTitle)
                     Text("Community Level")
                         .font(.caption2)
                 }
                 Spacer()
                 VStack {
-                    Text(commData.transmissionLevel.uppercased())
+                    Text(trans.level.uppercased())
                         .font(.largeTitle)
                     Text("Transmission Level")
                         .font(.caption2)
                 }
                 Spacer()
             }
-            ScrollView {
+            Spacer()
+                .frame(height: 20)
+            ScrollView(Axis.Set.horizontal, showsIndicators: false) {
+                HStack(spacing: 0) {
+                    ForEach(trans.historical) { historicalTrans in
+                        HistoricalTransmissionView(trans: historicalTrans)
+                    }
+                }
+            }
+            Divider()
+            ScrollView(showsIndicators: false) {
                 VStack(spacing: 0) {
-                    ForEach(commData.historical) { historyData in
-                        HistoricalCardView(commData: historyData)
+                    ForEach(comm.historical) { historicalComm in
+                        HistoricalCardView(comm: historicalComm)
                     }
                 }
                 Divider()
-                CommunityDetailsView(commData: commData)
-                    .padding([.leading, .trailing, .top, .bottom])
+                CommunityDetailsView(comm: comm)
+                    .padding([.leading, .trailing, .bottom])
             }
         }
     }
@@ -48,6 +59,6 @@ struct PageView: View {
 
 struct PageView_Previews: PreviewProvider {
     static var previews: some View {
-        PageView(commData: CommunityData.exampleData.first!)
+        PageView(comm: CommunityData.exampleData.first!, trans: TransmissionData.exampleData.first!)
     }
 }

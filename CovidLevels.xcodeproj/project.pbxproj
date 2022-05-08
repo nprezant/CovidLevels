@@ -20,6 +20,7 @@
 		4F5F04AD28258AC500FE9A1D /* HistoricalCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04AC28258AC500FE9A1D /* HistoricalCardView.swift */; };
 		4F5F04AF2825908700FE9A1D /* CommunityDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04AE2825908700FE9A1D /* CommunityDetailsView.swift */; };
 		4F5F04B1282591B100FE9A1D /* DetailItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04B0282591B100FE9A1D /* DetailItemView.swift */; };
+		4F7B4897282867350041912F /* HistoricalTransmissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7B4896282867350041912F /* HistoricalTransmissionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		4F5F04AC28258AC500FE9A1D /* HistoricalCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalCardView.swift; sourceTree = "<group>"; };
 		4F5F04AE2825908700FE9A1D /* CommunityDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityDetailsView.swift; sourceTree = "<group>"; };
 		4F5F04B0282591B100FE9A1D /* DetailItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemView.swift; sourceTree = "<group>"; };
+		4F7B4896282867350041912F /* HistoricalTransmissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalTransmissionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				4F5F043D2824537100FE9A1D /* ContentView.swift */,
 				4F5F04A628257CB600FE9A1D /* CardView.swift */,
 				4F5F04AC28258AC500FE9A1D /* HistoricalCardView.swift */,
+				4F7B4896282867350041912F /* HistoricalTransmissionView.swift */,
 				4F5F04AA2825830C00FE9A1D /* PageView.swift */,
 				4F5F04A828257D2200FE9A1D /* CommunityData.swift */,
 				4F5F04AE2825908700FE9A1D /* CommunityDetailsView.swift */,
@@ -278,6 +281,7 @@
 				4F5F04AF2825908700FE9A1D /* CommunityDetailsView.swift in Sources */,
 				4F5F04AB2825830C00FE9A1D /* PageView.swift in Sources */,
 				4F5F043E2824537100FE9A1D /* ContentView.swift in Sources */,
+				4F7B4897282867350041912F /* HistoricalTransmissionView.swift in Sources */,
 				4F5F04AD28258AC500FE9A1D /* HistoricalCardView.swift in Sources */,
 				4F5F04B1282591B100FE9A1D /* DetailItemView.swift in Sources */,
 				4F5F04A728257CB600FE9A1D /* CardView.swift in Sources */,
