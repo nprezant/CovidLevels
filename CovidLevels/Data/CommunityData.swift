@@ -20,6 +20,10 @@ struct TransmissionData : Identifiable {
     var percentPositiveTestsLast7Days: Double
     var newCasesPer100kLast7Days: Double? // May be "suppressed" if number is low but non-zero
     var historical: [TransmissionData] = []
+    
+    func levelColor() -> Color {
+        return CovidLevels.levelColor(level: level)
+    }
 }
 
 struct CommunityData : Identifiable {
@@ -39,6 +43,10 @@ struct CommunityData : Identifiable {
     var covidHospitalAdmissionsPer100k: Double // 7 day total
     var covidInpatientBedUtilization: Double // Percent of staffed inpatient beds occupied by COVID-19 patients (7 day average)
     var historical: [CommunityData] = []
+    
+    func levelColor() -> Color {
+        return CovidLevels.levelColor(level: level)
+    }
 }
 
 fileprivate func LarimerTransmissionData(level: String, dateUpdated: Date, historical: [TransmissionData] = []) -> TransmissionData {
@@ -86,18 +94,6 @@ extension CommunityData {
     }
 }
 
-extension CommunityData {
-    func levelColor() -> Color {
-        return CovidLevels.levelColor(level: level)
-    }
-}
-
-extension TransmissionData {
-    func levelColor() -> Color {
-        return CovidLevels.levelColor(level: level)
-    }
-}
-
 fileprivate func levelColor(level: String) -> Color {
     switch level.lowercased() {
     case "low":
@@ -113,37 +109,10 @@ fileprivate func levelColor(level: String) -> Color {
     }
 }
 
-extension Color {
-    init(hex: UInt, alpha: Double = 1) {
-        self.init(
-            .sRGB,
-            red: Double((hex >> 16) & 0xff) / 255,
-            green: Double((hex >> 08) & 0xff) / 255,
-            blue: Double((hex >> 00) & 0xff) / 255,
-            opacity: alpha
-        )
-    }
-}
-
 fileprivate func secondsInDays(days: Int) -> Double {
     return Double(60 * 60 * 24 * days)
 }
 
 fileprivate func secondsInDays(weeks: Int) -> Double {
     return secondsInDays(days: weeks * 7)
-}
-
-extension Date {
-    func formatted(_ format: String) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = format
-        return formatter.string(from: self)
-    }
-    
-    func formatted(dateStyle: DateFormatter.Style, timeStyle: DateFormatter.Style = .none) -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = dateStyle
-        formatter.timeStyle = timeStyle
-        return formatter.string(from: self)
-    }
 }
