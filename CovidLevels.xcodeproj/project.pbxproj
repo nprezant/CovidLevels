@@ -108,15 +108,11 @@
 		4F5F043A2824537100FE9A1D /* CovidLevels */ = {
 			isa = PBXGroup;
 			children = (
+				4F7B489A282870050041912F /* ListViews */,
+				4F7B489928286FE10041912F /* PageViews */,
+				4F7B489828286F7C0041912F /* Data */,
 				4F5F043B2824537100FE9A1D /* CovidLevelsApp.swift */,
 				4F5F043D2824537100FE9A1D /* ContentView.swift */,
-				4F5F04A628257CB600FE9A1D /* CardView.swift */,
-				4F5F04AC28258AC500FE9A1D /* HistoricalCardView.swift */,
-				4F7B4896282867350041912F /* HistoricalTransmissionView.swift */,
-				4F5F04AA2825830C00FE9A1D /* PageView.swift */,
-				4F5F04A828257D2200FE9A1D /* CommunityData.swift */,
-				4F5F04AE2825908700FE9A1D /* CommunityDetailsView.swift */,
-				4F5F04B0282591B100FE9A1D /* DetailItemView.swift */,
 				4F5F043F2824537300FE9A1D /* Assets.xcassets */,
 				4F5F04412824537300FE9A1D /* Preview Content */,
 			);
@@ -146,6 +142,34 @@
 				4F5F04582824537300FE9A1D /* CovidLevelsUITestsLaunchTests.swift */,
 			);
 			path = CovidLevelsUITests;
+			sourceTree = "<group>";
+		};
+		4F7B489828286F7C0041912F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F04A828257D2200FE9A1D /* CommunityData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		4F7B489928286FE10041912F /* PageViews */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F04AA2825830C00FE9A1D /* PageView.swift */,
+				4F5F04AC28258AC500FE9A1D /* HistoricalCardView.swift */,
+				4F7B4896282867350041912F /* HistoricalTransmissionView.swift */,
+				4F5F04AE2825908700FE9A1D /* CommunityDetailsView.swift */,
+				4F5F04B0282591B100FE9A1D /* DetailItemView.swift */,
+			);
+			path = PageViews;
+			sourceTree = "<group>";
+		};
+		4F7B489A282870050041912F /* ListViews */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F04A628257CB600FE9A1D /* CardView.swift */,
+			);
+			path = ListViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
