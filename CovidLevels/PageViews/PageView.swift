@@ -51,6 +51,9 @@ struct PageView: View {
                 }
                 Divider()
                 CommunityDetailsView(comm: comm)
+                    .padding([.leading, .trailing])
+                Divider()
+                TransmissionDetailsView(trans: trans)
                     .padding([.leading, .trailing, .bottom])
             }
         }
