@@ -1,17 +1,17 @@
 //
-//  HistoricalCardView.swift
-//  CovidCommunityLevels
+//  CardView.swift
+//  CovidLevels
 //
 //  Created by Noah on 5/6/22.
 //
 
 import SwiftUI
 
-struct HistoricalCardView: View {
+struct CardView: View {
     let commData: CommunityData
     var body: some View {
         HStack {
-            Text(commData.dateUpdated.formatted())
+            Text(commData.healthServiceArea)
                 .font(.body)
             Spacer()
             Text(commData.level)
@@ -24,8 +24,8 @@ struct HistoricalCardView: View {
     }
 }
 
-struct HistoricalCardView_Previews: PreviewProvider {
+struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        HistoricalCardView(commData: CommunityData.exampleData.first!)
+        CardView(commData: CommunityData.exampleData.first!)
     }
 }

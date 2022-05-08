@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  CovidCommunityLevels
+//  CovidLevels
 //
 //  Created by Noah on 5/5/22.
 //

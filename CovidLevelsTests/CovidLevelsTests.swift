@@ -1,14 +1,14 @@
 //
-//  CovidCommunityLevelsTests.swift
-//  CovidCommunityLevelsTests
+//  CovidLevelsTests.swift
+//  CovidLevelsTests
 //
 //  Created by Noah on 5/5/22.
 //
 
 import XCTest
-@testable import CovidCommunityLevels
+@testable import CovidLevels
 
-class CovidCommunityLevelsTests: XCTestCase {
+class CovidLevelsTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

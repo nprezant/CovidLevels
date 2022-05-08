@@ -1,6 +1,6 @@
 //
-//  CovidCommunityLevelsApp.swift
-//  CovidCommunityLevels
+//  CovidLevelsApp.swift
+//  CovidLevels
 //
 //  Created by Noah on 5/5/22.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct CovidCommunityLevelsApp: App {
+struct CovidLevelsApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

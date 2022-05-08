@@ -1,13 +1,13 @@
 //
-//  CovidCommunityLevelsUITestsLaunchTests.swift
-//  CovidCommunityLevelsUITests
+//  CovidLevelsUITestsLaunchTests.swift
+//  CovidLevelsUITests
 //
 //  Created by Noah on 5/5/22.
 //
 
 import XCTest
 
-class CovidCommunityLevelsUITestsLaunchTests: XCTestCase {
+class CovidLevelsUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

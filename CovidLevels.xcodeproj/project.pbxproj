@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F5F043C2824537100FE9A1D /* CovidCommunityLevelsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F043B2824537100FE9A1D /* CovidCommunityLevelsApp.swift */; };
+		4F5F043C2824537100FE9A1D /* CovidLevelsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F043B2824537100FE9A1D /* CovidLevelsApp.swift */; };
 		4F5F043E2824537100FE9A1D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F043D2824537100FE9A1D /* ContentView.swift */; };
 		4F5F04402824537300FE9A1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F5F043F2824537300FE9A1D /* Assets.xcassets */; };
 		4F5F04432824537300FE9A1D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F5F04422824537300FE9A1D /* Preview Assets.xcassets */; };
-		4F5F044D2824537300FE9A1D /* CovidCommunityLevelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F044C2824537300FE9A1D /* CovidCommunityLevelsTests.swift */; };
-		4F5F04572824537300FE9A1D /* CovidCommunityLevelsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04562824537300FE9A1D /* CovidCommunityLevelsUITests.swift */; };
-		4F5F04592824537300FE9A1D /* CovidCommunityLevelsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04582824537300FE9A1D /* CovidCommunityLevelsUITestsLaunchTests.swift */; };
+		4F5F044D2824537300FE9A1D /* CovidLevelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F044C2824537300FE9A1D /* CovidLevelsTests.swift */; };
+		4F5F04572824537300FE9A1D /* CovidLevelsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04562824537300FE9A1D /* CovidLevelsUITests.swift */; };
+		4F5F04592824537300FE9A1D /* CovidLevelsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04582824537300FE9A1D /* CovidLevelsUITestsLaunchTests.swift */; };
 		4F5F04A728257CB600FE9A1D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04A628257CB600FE9A1D /* CardView.swift */; };
 		4F5F04A928257D2200FE9A1D /* CommunityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04A828257D2200FE9A1D /* CommunityData.swift */; };
 		4F5F04AB2825830C00FE9A1D /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04AA2825830C00FE9A1D /* PageView.swift */; };
@@ -40,16 +40,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4F5F04382824537100FE9A1D /* CovidCommunityLevels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CovidCommunityLevels.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F5F043B2824537100FE9A1D /* CovidCommunityLevelsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidCommunityLevelsApp.swift; sourceTree = "<group>"; };
+		4F5F04382824537100FE9A1D /* CovidLevels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CovidLevels.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F5F043B2824537100FE9A1D /* CovidLevelsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidLevelsApp.swift; sourceTree = "<group>"; };
 		4F5F043D2824537100FE9A1D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4F5F043F2824537300FE9A1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F5F04422824537300FE9A1D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		4F5F04482824537300FE9A1D /* CovidCommunityLevelsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CovidCommunityLevelsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F5F044C2824537300FE9A1D /* CovidCommunityLevelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidCommunityLevelsTests.swift; sourceTree = "<group>"; };
-		4F5F04522824537300FE9A1D /* CovidCommunityLevelsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CovidCommunityLevelsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F5F04562824537300FE9A1D /* CovidCommunityLevelsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidCommunityLevelsUITests.swift; sourceTree = "<group>"; };
-		4F5F04582824537300FE9A1D /* CovidCommunityLevelsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidCommunityLevelsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4F5F04482824537300FE9A1D /* CovidLevelsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CovidLevelsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F5F044C2824537300FE9A1D /* CovidLevelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidLevelsTests.swift; sourceTree = "<group>"; };
+		4F5F04522824537300FE9A1D /* CovidLevelsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CovidLevelsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F5F04562824537300FE9A1D /* CovidLevelsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidLevelsUITests.swift; sourceTree = "<group>"; };
+		4F5F04582824537300FE9A1D /* CovidLevelsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidLevelsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4F5F04A628257CB600FE9A1D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		4F5F04A828257D2200FE9A1D /* CommunityData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityData.swift; sourceTree = "<group>"; };
 		4F5F04AA2825830C00FE9A1D /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
@@ -86,9 +86,9 @@
 		4F5F042F2824537100FE9A1D = {
 			isa = PBXGroup;
 			children = (
-				4F5F043A2824537100FE9A1D /* CovidCommunityLevels */,
-				4F5F044B2824537300FE9A1D /* CovidCommunityLevelsTests */,
-				4F5F04552824537300FE9A1D /* CovidCommunityLevelsUITests */,
+				4F5F043A2824537100FE9A1D /* CovidLevels */,
+				4F5F044B2824537300FE9A1D /* CovidLevelsTests */,
+				4F5F04552824537300FE9A1D /* CovidLevelsUITests */,
 				4F5F04392824537100FE9A1D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -96,17 +96,17 @@
 		4F5F04392824537100FE9A1D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4F5F04382824537100FE9A1D /* CovidCommunityLevels.app */,
-				4F5F04482824537300FE9A1D /* CovidCommunityLevelsTests.xctest */,
-				4F5F04522824537300FE9A1D /* CovidCommunityLevelsUITests.xctest */,
+				4F5F04382824537100FE9A1D /* CovidLevels.app */,
+				4F5F04482824537300FE9A1D /* CovidLevelsTests.xctest */,
+				4F5F04522824537300FE9A1D /* CovidLevelsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4F5F043A2824537100FE9A1D /* CovidCommunityLevels */ = {
+		4F5F043A2824537100FE9A1D /* CovidLevels */ = {
 			isa = PBXGroup;
 			children = (
-				4F5F043B2824537100FE9A1D /* CovidCommunityLevelsApp.swift */,
+				4F5F043B2824537100FE9A1D /* CovidLevelsApp.swift */,
 				4F5F043D2824537100FE9A1D /* ContentView.swift */,
 				4F5F04A628257CB600FE9A1D /* CardView.swift */,
 				4F5F04AC28258AC500FE9A1D /* HistoricalCardView.swift */,
@@ -117,7 +117,7 @@
 				4F5F043F2824537300FE9A1D /* Assets.xcassets */,
 				4F5F04412824537300FE9A1D /* Preview Content */,
 			);
-			path = CovidCommunityLevels;
+			path = CovidLevels;
 			sourceTree = "<group>";
 		};
 		4F5F04412824537300FE9A1D /* Preview Content */ = {
@@ -128,29 +128,29 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		4F5F044B2824537300FE9A1D /* CovidCommunityLevelsTests */ = {
+		4F5F044B2824537300FE9A1D /* CovidLevelsTests */ = {
 			isa = PBXGroup;
 			children = (
-				4F5F044C2824537300FE9A1D /* CovidCommunityLevelsTests.swift */,
+				4F5F044C2824537300FE9A1D /* CovidLevelsTests.swift */,
 			);
-			path = CovidCommunityLevelsTests;
+			path = CovidLevelsTests;
 			sourceTree = "<group>";
 		};
-		4F5F04552824537300FE9A1D /* CovidCommunityLevelsUITests */ = {
+		4F5F04552824537300FE9A1D /* CovidLevelsUITests */ = {
 			isa = PBXGroup;
 			children = (
-				4F5F04562824537300FE9A1D /* CovidCommunityLevelsUITests.swift */,
-				4F5F04582824537300FE9A1D /* CovidCommunityLevelsUITestsLaunchTests.swift */,
+				4F5F04562824537300FE9A1D /* CovidLevelsUITests.swift */,
+				4F5F04582824537300FE9A1D /* CovidLevelsUITestsLaunchTests.swift */,
 			);
-			path = CovidCommunityLevelsUITests;
+			path = CovidLevelsUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4F5F04372824537100FE9A1D /* CovidCommunityLevels */ = {
+		4F5F04372824537100FE9A1D /* CovidLevels */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4F5F045C2824537300FE9A1D /* Build configuration list for PBXNativeTarget "CovidCommunityLevels" */;
+			buildConfigurationList = 4F5F045C2824537300FE9A1D /* Build configuration list for PBXNativeTarget "CovidLevels" */;
 			buildPhases = (
 				4F5F04342824537100FE9A1D /* Sources */,
 				4F5F04352824537100FE9A1D /* Frameworks */,
@@ -160,14 +160,14 @@
 			);
 			dependencies = (
 			);
-			name = CovidCommunityLevels;
+			name = CovidLevels;
 			productName = CovidCommunityLevels;
-			productReference = 4F5F04382824537100FE9A1D /* CovidCommunityLevels.app */;
+			productReference = 4F5F04382824537100FE9A1D /* CovidLevels.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4F5F04472824537300FE9A1D /* CovidCommunityLevelsTests */ = {
+		4F5F04472824537300FE9A1D /* CovidLevelsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4F5F045F2824537300FE9A1D /* Build configuration list for PBXNativeTarget "CovidCommunityLevelsTests" */;
+			buildConfigurationList = 4F5F045F2824537300FE9A1D /* Build configuration list for PBXNativeTarget "CovidLevelsTests" */;
 			buildPhases = (
 				4F5F04442824537300FE9A1D /* Sources */,
 				4F5F04452824537300FE9A1D /* Frameworks */,
@@ -178,14 +178,14 @@
 			dependencies = (
 				4F5F044A2824537300FE9A1D /* PBXTargetDependency */,
 			);
-			name = CovidCommunityLevelsTests;
+			name = CovidLevelsTests;
 			productName = CovidCommunityLevelsTests;
-			productReference = 4F5F04482824537300FE9A1D /* CovidCommunityLevelsTests.xctest */;
+			productReference = 4F5F04482824537300FE9A1D /* CovidLevelsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		4F5F04512824537300FE9A1D /* CovidCommunityLevelsUITests */ = {
+		4F5F04512824537300FE9A1D /* CovidLevelsUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4F5F04622824537300FE9A1D /* Build configuration list for PBXNativeTarget "CovidCommunityLevelsUITests" */;
+			buildConfigurationList = 4F5F04622824537300FE9A1D /* Build configuration list for PBXNativeTarget "CovidLevelsUITests" */;
 			buildPhases = (
 				4F5F044E2824537300FE9A1D /* Sources */,
 				4F5F044F2824537300FE9A1D /* Frameworks */,
@@ -196,9 +196,9 @@
 			dependencies = (
 				4F5F04542824537300FE9A1D /* PBXTargetDependency */,
 			);
-			name = CovidCommunityLevelsUITests;
+			name = CovidLevelsUITests;
 			productName = CovidCommunityLevelsUITests;
-			productReference = 4F5F04522824537300FE9A1D /* CovidCommunityLevelsUITests.xctest */;
+			productReference = 4F5F04522824537300FE9A1D /* CovidLevelsUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -224,7 +224,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4F5F04332824537100FE9A1D /* Build configuration list for PBXProject "CovidCommunityLevels" */;
+			buildConfigurationList = 4F5F04332824537100FE9A1D /* Build configuration list for PBXProject "CovidLevels" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -237,9 +237,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4F5F04372824537100FE9A1D /* CovidCommunityLevels */,
-				4F5F04472824537300FE9A1D /* CovidCommunityLevelsTests */,
-				4F5F04512824537300FE9A1D /* CovidCommunityLevelsUITests */,
+				4F5F04372824537100FE9A1D /* CovidLevels */,
+				4F5F04472824537300FE9A1D /* CovidLevelsTests */,
+				4F5F04512824537300FE9A1D /* CovidLevelsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -282,7 +282,7 @@
 				4F5F04B1282591B100FE9A1D /* DetailItemView.swift in Sources */,
 				4F5F04A728257CB600FE9A1D /* CardView.swift in Sources */,
 				4F5F04A928257D2200FE9A1D /* CommunityData.swift in Sources */,
-				4F5F043C2824537100FE9A1D /* CovidCommunityLevelsApp.swift in Sources */,
+				4F5F043C2824537100FE9A1D /* CovidLevelsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,7 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F5F044D2824537300FE9A1D /* CovidCommunityLevelsTests.swift in Sources */,
+				4F5F044D2824537300FE9A1D /* CovidLevelsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,8 +298,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F5F04572824537300FE9A1D /* CovidCommunityLevelsUITests.swift in Sources */,
-				4F5F04592824537300FE9A1D /* CovidCommunityLevelsUITestsLaunchTests.swift in Sources */,
+				4F5F04572824537300FE9A1D /* CovidLevelsUITests.swift in Sources */,
+				4F5F04592824537300FE9A1D /* CovidLevelsUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,12 +308,12 @@
 /* Begin PBXTargetDependency section */
 		4F5F044A2824537300FE9A1D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4F5F04372824537100FE9A1D /* CovidCommunityLevels */;
+			target = 4F5F04372824537100FE9A1D /* CovidLevels */;
 			targetProxy = 4F5F04492824537300FE9A1D /* PBXContainerItemProxy */;
 		};
 		4F5F04542824537300FE9A1D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4F5F04372824537100FE9A1D /* CovidCommunityLevels */;
+			target = 4F5F04372824537100FE9A1D /* CovidLevels */;
 			targetProxy = 4F5F04532824537300FE9A1D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -442,7 +442,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"CovidCommunityLevels/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"CovidLevels/Preview Content\"";
 				DEVELOPMENT_TEAM = V25L9AB7AX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -457,8 +457,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hello.CovidCommunityLevels;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hello.CovidLevels;
+				PRODUCT_NAME = CovidLevels;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -472,7 +472,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"CovidCommunityLevels/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"CovidLevels/Preview Content\"";
 				DEVELOPMENT_TEAM = V25L9AB7AX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -487,8 +487,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hello.CovidCommunityLevels;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hello.CovidLevels;
+				PRODUCT_NAME = CovidLevels;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -511,12 +511,12 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hello.CovidCommunityLevelsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hello.CovidLevelsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CovidCommunityLevels.app/CovidCommunityLevels";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CovidLevels.app/CovidLevels";
 			};
 			name = Debug;
 		};
@@ -536,12 +536,12 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hello.CovidCommunityLevelsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hello.CovidLevelsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CovidCommunityLevels.app/CovidCommunityLevels";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CovidLevels.app/CovidLevels";
 			};
 			name = Release;
 		};
@@ -559,12 +559,12 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hello.CovidCommunityLevelsUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hello.CovidLevelsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = CovidCommunityLevels;
+				TEST_TARGET_NAME = CovidLevels;
 			};
 			name = Debug;
 		};
@@ -582,19 +582,19 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hello.CovidCommunityLevelsUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hello.CovidLevelsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = CovidCommunityLevels;
+				TEST_TARGET_NAME = CovidLevels;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4F5F04332824537100FE9A1D /* Build configuration list for PBXProject "CovidCommunityLevels" */ = {
+		4F5F04332824537100FE9A1D /* Build configuration list for PBXProject "CovidLevels" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4F5F045A2824537300FE9A1D /* Debug */,
@@ -603,7 +603,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4F5F045C2824537300FE9A1D /* Build configuration list for PBXNativeTarget "CovidCommunityLevels" */ = {
+		4F5F045C2824537300FE9A1D /* Build configuration list for PBXNativeTarget "CovidLevels" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4F5F045D2824537300FE9A1D /* Debug */,
@@ -612,7 +612,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4F5F045F2824537300FE9A1D /* Build configuration list for PBXNativeTarget "CovidCommunityLevelsTests" */ = {
+		4F5F045F2824537300FE9A1D /* Build configuration list for PBXNativeTarget "CovidLevelsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4F5F04602824537300FE9A1D /* Debug */,
@@ -621,7 +621,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4F5F04622824537300FE9A1D /* Build configuration list for PBXNativeTarget "CovidCommunityLevelsUITests" */ = {
+		4F5F04622824537300FE9A1D /* Build configuration list for PBXNativeTarget "CovidLevelsUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4F5F04632824537300FE9A1D /* Debug */,
