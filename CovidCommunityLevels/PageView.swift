@@ -15,10 +15,23 @@ struct PageView: View {
                 .font(.title3)
             Spacer()
                 .frame(height: 10)
-            Text(commData.level.uppercased())
-                .font(.largeTitle)
-            Text("Community Level")
-                .font(.caption2)
+            HStack {
+                Spacer()
+                VStack {
+                    Text(commData.level.uppercased())
+                        .font(.largeTitle)
+                    Text("Community Level")
+                        .font(.caption2)
+                }
+                Spacer()
+                VStack {
+                    Text(commData.transmissionLevel.uppercased())
+                        .font(.largeTitle)
+                    Text("Transmission Level")
+                        .font(.caption2)
+                }
+                Spacer()
+            }
             ScrollView {
                 VStack(spacing: 0) {
                     ForEach(commData.historical) { historyData in

@@ -12,6 +12,7 @@ struct CommunityData : Identifiable {
     var id = UUID() // Each instance will be uniquely identifiable
     
     var level: String
+    var transmissionLevel: String
     var dateUpdated: Date
     var county: String
     var countyPopulation: Int
@@ -23,8 +24,8 @@ struct CommunityData : Identifiable {
     var historical: [CommunityData] = []
 }
 
-fileprivate func LarimerData(level: String, dateUpdated: Date, historical: [CommunityData] = []) -> CommunityData {
-    return CommunityData(level: level, dateUpdated: dateUpdated, county: "Larimer County", countyPopulation: 356899, state: "Colorado", casesPer100k: 103.95, hospitalAdmissionsPer100k: 6.2, healthServiceArea: "Larimer, CO", healthServiceAreaPopulation: 356899, historical: historical)
+fileprivate func LarimerData(level: String, transmissionLevel: String, dateUpdated: Date, historical: [CommunityData] = []) -> CommunityData {
+    return CommunityData(level: level, transmissionLevel: transmissionLevel, dateUpdated: dateUpdated, county: "Larimer County", countyPopulation: 356899, state: "Colorado", casesPer100k: 103.95, hospitalAdmissionsPer100k: 6.2, healthServiceArea: "Larimer, CO", healthServiceAreaPopulation: 356899, historical: historical)
 }
 
 extension CommunityData {
@@ -32,12 +33,13 @@ extension CommunityData {
         [
             LarimerData(
                 level: "Low",
+                transmissionLevel: "Low",
                 dateUpdated: Date.now,
                 historical:
                     [
-                        LarimerData(level: "Low", dateUpdated: Date.now.addingTimeInterval(-60*60*24*7)),
-                        LarimerData(level: "Med", dateUpdated: Date.now.addingTimeInterval(-60*60*24*7*2)),
-                        LarimerData(level: "High", dateUpdated: Date.now.addingTimeInterval(-60*60*24*7*3)),
+                        LarimerData(level: "Low", transmissionLevel: "Moderate", dateUpdated: Date.now.addingTimeInterval(-60*60*24*7)),
+                        LarimerData(level: "Med", transmissionLevel: "Substantial", dateUpdated: Date.now.addingTimeInterval(-60*60*24*7*2)),
+                        LarimerData(level: "High", transmissionLevel: "High", dateUpdated: Date.now.addingTimeInterval(-60*60*24*7*3)),
                     ])
         ]
     }
