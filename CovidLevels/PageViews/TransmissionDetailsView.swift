@@ -17,8 +17,8 @@ struct TransmissionDetailsView: View {
 //                newCases = "\(newCasesPer100kLast7Days)"=
 //            }
             let newCases = trans.newCasesPer100kLast7Days != nil ? "\(trans.newCasesPer100kLast7Days ?? -1)" : "<10"
-            DetailItemView(name: "New cases per 100k, last 7 days", value: newCases)
-            DetailItemView(name: "Positive tests (NAAT), last 7 days", value: "\(trans.percentPositiveTestsLast7Days)%")
+            DetailItemView(name: "New cases per 100k, last 7 days (daily)", value: newCases)
+            DetailItemView(name: "Positive tests (NAAT), last 7 days (daily)", value: "\(trans.percentPositiveTestsLast7Days)%")
             DetailItemView(name: "Date Updated", value: "\(trans.date.formatted(dateStyle: .medium))")
         }
     }
