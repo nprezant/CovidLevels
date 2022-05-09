@@ -12,13 +12,13 @@ struct TransmissionData : Identifiable {
     // Data source: https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-County-Level-of-Community-T/8396-v7yb
     // Updated daily
     var id = UUID() // Each instance will be uniquely identifiable
-    var level: String // Options: low, moderate, substantial, high, blank
-    var state: String
-    var county: String
-    var countyFips: String // Zero padded
-    var date: Date
-    var percentPositiveTestsLast7Days: Double
-    var newCasesPer100kLast7Days: Double? // May be "suppressed" if number is low but non-zero
+    var level: String = "-" // Options: low, moderate, substantial, high, blank
+    var state: String = "-"
+    var county: String = "-"
+    var countyFips: String = "-" // Zero padded
+    var date: Date = Date.now
+    var percentPositiveTestsLast7Days: Double = -1
+    var newCasesPer100kLast7Days: Double? = nil // May be "suppressed" if number is low but non-zero
     var historical: [TransmissionData] = []
     
     func levelColor() -> Color {
@@ -115,4 +115,128 @@ fileprivate func secondsInDays(days: Int) -> Double {
 
 fileprivate func secondsInDays(weeks: Int) -> Double {
     return secondsInDays(days: weeks * 7)
+}
+
+enum SerializationError: Error {
+    case missing(String)
+    case invalid(String, Any)
+}
+
+extension Dictionary where Key == String {
+    func extract(_ key: String) -> String? {
+        guard let value = self[key] as? String else {
+            debugPrint("Value missing from dictionary: \(key)")
+            return nil
+        }
+        return value
+    }
+}
+
+extension Date {
+    static func fromSocrataFloatingTimestamp(_ isoDate: String) -> Date? {
+        // Interpret the iso date
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+        guard let date = dateFormatter.date(from: isoDate) else { return nil }
+
+        // Now for the current timezone
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day, .hour], from: date)
+
+        return calendar.date(from: components)
+    }
+}
+
+extension TransmissionData {
+    init(json: [String: Any]) {
+        // Extract simple string data
+        let state = json.extract("state_name")
+        let level = json.extract("community_transmission_level")
+        let county = json.extract("county_name")
+        let countyFips = json.extract("fips_code")
+        
+        var percentPositiveTestsLast7Days: Double?
+        if let x = json.extract("percent_test_results_reported") {
+            percentPositiveTestsLast7Days = Double(x)
+        }
+        
+        // Date is a little special. Socrata dates are ISO8601 Times with no timezone offset
+        // https://dev.socrata.com/docs/datatypes/floating_timestamp.html
+        // https://stackoverflow.com/questions/36861732/convert-string-to-date-in-swift
+        var date: Date?
+        if let x = json.extract("report_date") {
+            date = Date.fromSocrataFloatingTimestamp(x)
+        }
+        
+        // This value might be 'supressed' if it is positive but less than 10
+        var newCasesPer100kLast7Days: Double?
+        if let x = json.extract("cases_per_100k_7_day_count") {
+            if x == "suppressed" {
+                newCasesPer100kLast7Days = nil // Means 0<x<10
+            }
+            else {
+                newCasesPer100kLast7Days = Double(x)
+            }
+        }
+        
+        // Initialize properties
+        if let level = level {
+            self.level = level
+        }
+        if let state = state {
+            self.state = state
+        }
+        if let county = county {
+            self.county = county
+        }
+        if let countyFips = countyFips {
+            self.countyFips = countyFips
+        }
+        if let date = date {
+            self.date = date
+        }
+        if let percentPositiveTestsLast7Days = percentPositiveTestsLast7Days {
+            self.percentPositiveTestsLast7Days = percentPositiveTestsLast7Days
+        }
+        self.newCasesPer100kLast7Days = newCasesPer100kLast7Days
+        self.historical = [] // Not handled by the json reader. The json reader just reads a single instance.
+    }
+        
+    static func requestList(state: String, county: String, completion: @escaping ([TransmissionData]) -> Void) {
+        var urlComponents = URLComponents(string: "https://data.cdc.gov/resource/8396-v7yb.json")!
+        urlComponents.queryItems = [URLQueryItem(name: "state_name", value: state), URLQueryItem(name: "county_name", value: county)]
+        let url = urlComponents.url!
+        
+        var request = URLRequest(url: url)
+        request.setValue("X-App-Token", forHTTPHeaderField: "f3fjentqIxjN6C9UkGM3TfzjD")
+
+        let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
+            var transmissions: [TransmissionData] = []
+            
+            if let data = data,
+               let json = try? JSONSerialization.jsonObject(with: data, options: []) as? Array<[String: Any]> {
+                for item in json {
+                    let transmission = TransmissionData(json: item)
+                    transmissions.append(transmission)
+                }
+            }
+            
+            completion(transmissions)
+        }
+
+        task.resume()
+    }
+    
+    static func request(state: String, county: String, completion: @escaping (TransmissionData) -> Void) {
+        requestList(state: state, county: county) { (transmissions) in
+            if transmissions.isEmpty {
+                completion(TransmissionData())
+                return
+            }
+            var transmission = transmissions.first!
+            transmission.historical = Array(transmissions[1...])
+            completion(transmission)
+        }
+    }
 }
