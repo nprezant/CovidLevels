@@ -32,7 +32,7 @@ struct ContentView: View {
         } else {
             ScrollView {
                 VStack {
-                    ForEach(self.locations.locations.indices) { index in
+                    ForEach(self.locations.locations.indices, id: \.self) { index in
                         LocationCardView(location: self.locations.locations[index])
                             .onTapGesture {
                                 detailIndex = index
@@ -56,7 +56,10 @@ struct ContentView: View {
                 locations.request()
             }
             .sheet(isPresented: $showingSearch, onDismiss: { debugPrint("dismissed") }) {
-                LocationSearch()
+                LocationSearch() { loc in
+                    locations.add(loc)
+                    showingSearch = false
+                }
             }
         }
     }

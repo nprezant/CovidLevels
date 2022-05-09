@@ -10,6 +10,10 @@ import Foundation
 class Locations : ObservableObject {
     @Published var locations: [Location] = []
     
+    func add(_ loc: Location) {
+        locations.append(loc)
+    }
+    
     func request() {
         for loc in locations {
             loc.request()

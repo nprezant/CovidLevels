@@ -82,7 +82,7 @@ extension TransmissionData {
         self.newCasesPer100kLast7Days = newCasesPer100kLast7Days
         self.historical = [] // Not handled by the json reader. The json reader just reads a single instance.
     }
-        
+
     private static func requestList(state: String, county: String, completion: @escaping ([TransmissionData]) -> Void) {
         var urlComponents = URLComponents(string: TransmissionData.apiEndpoint)!
         urlComponents.queryItems = [

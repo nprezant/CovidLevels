@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct LocationSearch: View {
-    @State var searchText: String = ""
-    @State var searchItems: [SearchItem] = []
+    let locationAdded: ((Location) -> Void)
+    
+    @State private var searchText: String = ""
+    @State private var searchItems: [SearchItem] = []
+
+    @State private var showingPreview: Bool = false
+    @State private var previewLocation: Location? = nil
     
     func updateSearchItems(_ searchText: String) {
         SearchItem.provider(searchText: searchText) { items in
@@ -28,7 +33,35 @@ struct LocationSearch: View {
                 ForEach(searchItems) { item in
                     SearchItemView(item: item, searchText: searchText)
                         .padding([.leading])
+                        .onTapGesture {
+                            previewLocation = item.location
+                            previewLocation?.request()
+                            showingPreview = true
+                        }
                 }
+            }
+            // Silly.
+            // https://developer.apple.com/forums/thread/652080
+            let _ = "\(previewLocation?.state ?? "none")"
+        }
+        .sheet(isPresented: $showingPreview, onDismiss: { debugPrint("location preview dismissed") }) {
+            if let previewLocation = previewLocation {
+                ZStack {
+                    VStack {
+                        HStack {
+                            Button("Cancel") { showingPreview = false }
+                                .padding()
+                            Spacer()
+                            Button("Add") { locationAdded(previewLocation); showingPreview = false }
+                                .padding()
+                        }
+                        Spacer()
+                    }
+                    PageView(loc: previewLocation)
+                        .padding([.top])
+                }
+            } else {
+                Text("No preview location selected")
             }
         }
     }
@@ -36,6 +69,6 @@ struct LocationSearch: View {
 
 struct LocationSearch_Previews: PreviewProvider {
     static var previews: some View {
-        LocationSearch(searchText: "Larimer")
+        LocationSearch() { _ in }
     }
 }
