@@ -17,7 +17,7 @@ struct ContentView: View {
         ScrollView {
             VStack {
                 ForEach(self.locations.indices) { index in
-                        LocationCardView(location: self.$locations[index])
+                    LocationCardView(location: self.$locations[index])
                 }
             }
         }
