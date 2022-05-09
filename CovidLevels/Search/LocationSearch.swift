@@ -47,6 +47,8 @@ struct LocationSearch: View {
         .sheet(isPresented: $showingPreview, onDismiss: { debugPrint("location preview dismissed") }) {
             if let previewLocation = previewLocation {
                 ZStack {
+                    PageView(loc: previewLocation)
+                        .padding([.top])
                     VStack {
                         HStack {
                             Button("Cancel") { showingPreview = false }
@@ -57,8 +59,6 @@ struct LocationSearch: View {
                         }
                         Spacer()
                     }
-                    PageView(loc: previewLocation)
-                        .padding([.top])
                 }
             } else {
                 Text("No preview location selected")

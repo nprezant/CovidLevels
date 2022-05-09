@@ -31,12 +31,17 @@ struct ContentView: View {
             }
         } else {
             ScrollView {
-                VStack {
+                VStack(spacing: 0) {
                     ForEach(self.locations.locations.indices, id: \.self) { index in
                         LocationCardView(location: self.locations.locations[index])
                             .onTapGesture {
                                 detailIndex = index
                                 showingDetail = true
+                            }
+                            .deletable() {
+                                withAnimation {
+                                    locations.remove(at: index)
+                                }
                             }
                     }
                     Spacer()

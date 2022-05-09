@@ -14,6 +14,10 @@ class Locations : ObservableObject {
         locations.append(loc)
     }
     
+    func remove(at index: Array.Index) {
+        locations.remove(atOffsets: IndexSet([index]))
+    }
+    
     func request() {
         for loc in locations {
             loc.request()
