@@ -14,15 +14,33 @@ struct ContentView: View {
     @State var detailIndex: Int = 0
     
     var body: some View {
-        ScrollView {
+        if showingDetail {
             VStack {
-                ForEach(self.locations.locations.indices) { index in
-                    LocationCardView(location: self.locations.locations[index])
+                PageView(loc: locations.locations[detailIndex])
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        showingDetail = false
+                    }) {
+                        Image(systemName: "list.bullet")
+                    }
                 }
             }
-        }.onAppear {
-            for loc in locations.locations {
-                loc.request()
+        } else {
+            ScrollView {
+                VStack {
+                    ForEach(self.locations.locations.indices) { index in
+                        LocationCardView(location: self.locations.locations[index])
+                            .onTapGesture {
+                                detailIndex = index
+                                showingDetail = true
+                            }
+                    }
+                }
+            }
+            .onAppear {
+                debugPrint("Requesting all locations")
+                locations.request()
             }
         }
     }

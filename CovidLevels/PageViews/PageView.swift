@@ -8,25 +8,24 @@
 import SwiftUI
 
 struct PageView: View {
-    let comm: CommunityData
-    let trans: TransmissionData
+    @ObservedObject var loc: Location
     var body: some View {
         VStack {
-            Text("\(comm.county), \(comm.state)")
+            Text("\(loc.county), \(loc.state.toShortStateName())")
                 .font(.title3)
             Spacer()
                 .frame(height: 10)
             HStack {
                 Spacer()
                 VStack {
-                    Text(comm.level.uppercased())
+                    Text(loc.comm.level.uppercased())
                         .font(.largeTitle)
                     Text("Community Level")
                         .font(.caption2)
                 }
                 Spacer()
                 VStack {
-                    Text(trans.level.uppercased())
+                    Text(loc.trans.level.uppercased())
                         .font(.largeTitle)
                     Text("Transmission Level")
                         .font(.caption2)
@@ -37,7 +36,7 @@ struct PageView: View {
                 .frame(height: 20)
             ScrollView(Axis.Set.horizontal, showsIndicators: false) {
                 HStack(spacing: 0) {
-                    ForEach(trans.historical) { historicalTrans in
+                    ForEach(loc.trans.historical) { historicalTrans in
                         HistoricalTransmissionView(trans: historicalTrans)
                     }
                 }
@@ -45,15 +44,15 @@ struct PageView: View {
             Divider()
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 0) {
-                    ForEach(comm.historical) { historicalComm in
+                    ForEach(loc.comm.historical) { historicalComm in
                         HistoricalCardView(comm: historicalComm)
                     }
                 }
                 Divider()
-                CommunityDetailsView(comm: comm)
+                CommunityDetailsView(comm: loc.comm)
                     .padding([.leading, .trailing])
                 Divider()
-                TransmissionDetailsView(trans: trans)
+                TransmissionDetailsView(trans: loc.trans)
                     .padding([.leading, .trailing, .bottom])
             }
         }
@@ -62,6 +61,6 @@ struct PageView: View {
 
 struct PageView_Previews: PreviewProvider {
     static var previews: some View {
-        PageView(comm: CommunityData.exampleData.first!, trans: TransmissionData.exampleData.first!)
+        PageView(loc: Location.example)
     }
 }
