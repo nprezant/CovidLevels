@@ -20,7 +20,7 @@ struct HistoricalCommunityView: View {
         }
         .foregroundColor(.primary)
         .padding(.leading).padding(.trailing)
-        .background(comm.levelColor())
+        .background(comm.levelColor)
     }
 }
 

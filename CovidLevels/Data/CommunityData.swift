@@ -21,7 +21,7 @@ struct TransmissionData : Identifiable {
     var newCasesPer100kLast7Days: Double? = nil // May be "suppressed" if number is low but non-zero
     var historical: [TransmissionData] = []
     
-    func levelColor() -> Color {
+    var levelColor: Color {
         return CovidLevels.levelColor(level: level)
     }
     
@@ -55,7 +55,7 @@ struct CommunityData : Identifiable {
     var covidInpatientBedUtilization: Double = -1 // Percent of staffed inpatient beds occupied by COVID-19 patients (7 day average)
     var historical: [CommunityData] = []
     
-    func levelColor() -> Color {
+    var levelColor: Color {
         return CovidLevels.levelColor(level: level)
     }
 }

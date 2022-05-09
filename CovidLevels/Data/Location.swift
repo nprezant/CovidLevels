@@ -34,7 +34,7 @@ class Location : Identifiable, ObservableObject {
     func request() {
         TransmissionData.request(state: state, county: county) { [weak self] transmission in
             guard let self = self else { return }
-            debugPrint("Got transmission data. \(transmission.county.withoutCounty()): \(transmission.level)")
+            debugPrint("Got transmission data. \(transmission.county.withoutCounty): \(transmission.level)")
             DispatchQueue.main.async {
                 self.trans = transmission
             }

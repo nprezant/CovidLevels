@@ -81,15 +81,15 @@ class StateNames {
 }
 
 extension String {
-    func toLongStateName() -> String {
+    var asLongStateName: String {
         return StateNames.shortToLong[self.uppercased(), default: self]
     }
     
-    func toShortStateName() -> String {
+    var asShortStateName: String {
         return StateNames.longToShort[self.uppercased(), default: self]
     }
     
-    func withoutCounty() -> String {
+    var withoutCounty: String {
         return self.replacingOccurrences(of: " County", with: "")
     }
 }

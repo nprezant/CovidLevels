@@ -23,7 +23,7 @@ struct HistoricalTransmissionView: View {
                 .font(.body)
         }
         .padding()
-        .background(trans.levelColor())
+        .background(trans.levelColor)
     }
 }
 

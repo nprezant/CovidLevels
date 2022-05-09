@@ -11,7 +11,7 @@ struct LocationCardView: View {
     @ObservedObject var location: Location
     var body: some View {
         HStack {
-            Text("\(location.county.withoutCounty()), \(location.state.toShortStateName())")
+            Text("\(location.county.withoutCounty), \(location.state.asShortStateName)")
                 .font(.body)
             Spacer()
             Text(location.comm.level)
@@ -20,7 +20,7 @@ struct LocationCardView: View {
         }
         .foregroundColor(.primary)
         .padding(.leading).padding(.trailing)
-        .background(location.comm.levelColor())
+        .background(location.comm.levelColor)
     }
 }
 

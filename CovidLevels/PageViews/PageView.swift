@@ -11,7 +11,7 @@ struct PageView: View {
     @ObservedObject var loc: Location
     var body: some View {
         VStack {
-            Text("\(loc.county), \(loc.state.toShortStateName())")
+            Text("\(loc.county), \(loc.state.asShortStateName)")
                 .font(.title3)
             Spacer()
                 .frame(height: 10)
