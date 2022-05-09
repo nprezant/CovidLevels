@@ -8,9 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var locations: [Location] = Location.examples
+    
+    @State var showingDetail: Bool = false
+    @State var detailIndex: Int = 0
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ScrollView {
+            VStack {
+                ForEach(self.locations.indices) { index in
+                        LocationCardView(location: self.$locations[index])
+                }
+            }
+        }
     }
 }
 

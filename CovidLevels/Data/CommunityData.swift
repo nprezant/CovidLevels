@@ -30,18 +30,18 @@ struct CommunityData : Identifiable {
     // Data source: https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni
     // Updated weekly
     var id = UUID() // Each instance will be uniquely identifiable
-    var level: String // Options: Low, Medium, High
-    var dateUpdated: Date
-    var county: String
-    var countyFips: String // Zero padded
-    var countyPopulation: Int
-    var state: String
-    var healthServiceArea: String
-    var healthServiceAreaNumber: Int
-    var healthServiceAreaPopulation: Int
-    var covidCasesPer100k: Double // 7 day total
-    var covidHospitalAdmissionsPer100k: Double // 7 day total
-    var covidInpatientBedUtilization: Double // Percent of staffed inpatient beds occupied by COVID-19 patients (7 day average)
+    var level: String = "-" // Options: Low, Medium, High
+    var dateUpdated: Date = Date.now
+    var county: String = "-"
+    var countyFips: String = "-" // Zero padded
+    var countyPopulation: Int = -1
+    var state: String = "-"
+    var healthServiceArea: String = "-"
+    var healthServiceAreaNumber: Int = -1
+    var healthServiceAreaPopulation: Int = -1
+    var covidCasesPer100k: Double = -1 // 7 day total
+    var covidHospitalAdmissionsPer100k: Double = -1 // 7 day total
+    var covidInpatientBedUtilization: Double = -1 // Percent of staffed inpatient beds occupied by COVID-19 patients (7 day average)
     var historical: [CommunityData] = []
     
     func levelColor() -> Color {

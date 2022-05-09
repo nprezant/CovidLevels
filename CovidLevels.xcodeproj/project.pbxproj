@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F41D03B2828B69200691E16 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41D03A2828B69200691E16 /* Location.swift */; };
+		4F41D03D2828BDA900691E16 /* StateNameUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41D03C2828BDA900691E16 /* StateNameUtils.swift */; };
 		4F5F043C2824537100FE9A1D /* CovidLevelsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F043B2824537100FE9A1D /* CovidLevelsApp.swift */; };
 		4F5F043E2824537100FE9A1D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F043D2824537100FE9A1D /* ContentView.swift */; };
 		4F5F04402824537300FE9A1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F5F043F2824537300FE9A1D /* Assets.xcassets */; };
@@ -14,7 +16,7 @@
 		4F5F044D2824537300FE9A1D /* CovidLevelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F044C2824537300FE9A1D /* CovidLevelsTests.swift */; };
 		4F5F04572824537300FE9A1D /* CovidLevelsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04562824537300FE9A1D /* CovidLevelsUITests.swift */; };
 		4F5F04592824537300FE9A1D /* CovidLevelsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04582824537300FE9A1D /* CovidLevelsUITestsLaunchTests.swift */; };
-		4F5F04A728257CB600FE9A1D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04A628257CB600FE9A1D /* CardView.swift */; };
+		4F5F04A728257CB600FE9A1D /* LocationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04A628257CB600FE9A1D /* LocationCardView.swift */; };
 		4F5F04A928257D2200FE9A1D /* CommunityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04A828257D2200FE9A1D /* CommunityData.swift */; };
 		4F5F04AB2825830C00FE9A1D /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04AA2825830C00FE9A1D /* PageView.swift */; };
 		4F5F04AD28258AC500FE9A1D /* HistoricalCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F04AC28258AC500FE9A1D /* HistoricalCardView.swift */; };
@@ -44,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F41D03A2828B69200691E16 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		4F41D03C2828BDA900691E16 /* StateNameUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateNameUtils.swift; sourceTree = "<group>"; };
 		4F5F04382824537100FE9A1D /* CovidLevels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CovidLevels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F5F043B2824537100FE9A1D /* CovidLevelsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidLevelsApp.swift; sourceTree = "<group>"; };
 		4F5F043D2824537100FE9A1D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,7 +58,7 @@
 		4F5F04522824537300FE9A1D /* CovidLevelsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CovidLevelsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F5F04562824537300FE9A1D /* CovidLevelsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidLevelsUITests.swift; sourceTree = "<group>"; };
 		4F5F04582824537300FE9A1D /* CovidLevelsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidLevelsUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		4F5F04A628257CB600FE9A1D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		4F5F04A628257CB600FE9A1D /* LocationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCardView.swift; sourceTree = "<group>"; };
 		4F5F04A828257D2200FE9A1D /* CommunityData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityData.swift; sourceTree = "<group>"; };
 		4F5F04AA2825830C00FE9A1D /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		4F5F04AC28258AC500FE9A1D /* HistoricalCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalCardView.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				4F5F04A828257D2200FE9A1D /* CommunityData.swift */,
+				4F41D03A2828B69200691E16 /* Location.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -176,7 +181,7 @@
 		4F7B489A282870050041912F /* ListViews */ = {
 			isa = PBXGroup;
 			children = (
-				4F5F04A628257CB600FE9A1D /* CardView.swift */,
+				4F5F04A628257CB600FE9A1D /* LocationCardView.swift */,
 			);
 			path = ListViews;
 			sourceTree = "<group>";
@@ -185,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				4F7B489C282870E10041912F /* Utils.swift */,
+				4F41D03C2828BDA900691E16 /* StateNameUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -324,11 +330,13 @@
 				4F5F043E2824537100FE9A1D /* ContentView.swift in Sources */,
 				4F7B4897282867350041912F /* HistoricalTransmissionView.swift in Sources */,
 				4F821ACD28287487000FE997 /* TransmissionDetailsView.swift in Sources */,
+				4F41D03B2828B69200691E16 /* Location.swift in Sources */,
 				4F5F04AD28258AC500FE9A1D /* HistoricalCardView.swift in Sources */,
 				4F5F04B1282591B100FE9A1D /* DetailItemView.swift in Sources */,
-				4F5F04A728257CB600FE9A1D /* CardView.swift in Sources */,
+				4F5F04A728257CB600FE9A1D /* LocationCardView.swift in Sources */,
 				4F7B489D282870E10041912F /* Utils.swift in Sources */,
 				4F5F04A928257D2200FE9A1D /* CommunityData.swift in Sources */,
+				4F41D03D2828BDA900691E16 /* StateNameUtils.swift in Sources */,
 				4F5F043C2824537100FE9A1D /* CovidLevelsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
