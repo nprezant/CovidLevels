@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var locations: [Location] = Location.examples
+    @StateObject var locations: Locations = Locations.example
     
     @State var showingDetail: Bool = false
     @State var detailIndex: Int = 0
@@ -16,9 +16,13 @@ struct ContentView: View {
     var body: some View {
         ScrollView {
             VStack {
-                ForEach(self.locations.indices) { index in
-                    LocationCardView(location: self.$locations[index])
+                ForEach(self.locations.locations.indices) { index in
+                    LocationCardView(location: self.locations.locations[index])
                 }
+            }
+        }.onAppear {
+            for loc in locations.locations {
+                loc.request()
             }
         }
     }

@@ -24,6 +24,17 @@ struct TransmissionData : Identifiable {
     func levelColor() -> Color {
         return CovidLevels.levelColor(level: level)
     }
+    
+    mutating func update(from t: TransmissionData) {
+        level = t.level
+        state = t.state
+        county = t.county
+        countyFips = t.countyFips
+        date = t.date
+        percentPositiveTestsLast7Days = t.percentPositiveTestsLast7Days
+        newCasesPer100kLast7Days = t.newCasesPer100kLast7Days
+        historical = t.historical
+    }
 }
 
 struct CommunityData : Identifiable {
@@ -229,7 +240,7 @@ extension TransmissionData {
     }
     
     static func request(state: String, county: String, completion: @escaping (TransmissionData) -> Void) {
-        requestList(state: state, county: county) { (transmissions) in
+        TransmissionData.requestList(state: state, county: county) { (transmissions) in
             if transmissions.isEmpty {
                 completion(TransmissionData())
                 return

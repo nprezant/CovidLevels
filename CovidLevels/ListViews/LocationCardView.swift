@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LocationCardView: View {
-    @Binding var location: Location
+    @ObservedObject var location: Location
     var body: some View {
         HStack {
             Text("\(location.county.withoutCounty()), \(location.state.toShortStateName())")
@@ -26,6 +26,6 @@ struct LocationCardView: View {
 
 struct LocationCardView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationCardView(location: .constant(Location.example))
+        LocationCardView(location: Location.example)
     }
 }
