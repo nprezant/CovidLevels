@@ -12,10 +12,10 @@ struct CommunityDetailsView: View {
     var body: some View {
         VStack(spacing: 10) {
             DetailItemView(name: "Population", value: "\(comm.countyPopulation)")
-            DetailItemView(name: "Cases per 100k (weekly)", value: "\(comm.covidCasesPer100k)")
-            DetailItemView(name: "Hospital Admissions per 100k (weekly)", value: "\(comm.covidHospitalAdmissionsPer100k)")
-            DetailItemView(name: "Bed Utilization (weekly)", value: "\(comm.covidInpatientBedUtilization)%")
-            DetailItemView(name: "Date Updated", value: "\(comm.dateUpdated.formatted(dateStyle: .medium))")
+            DetailItemView(name: "Cases per 100k", value: "\(comm.covidCasesPer100k)")
+            DetailItemView(name: "Hospital Admissions per 100k", value: "\(comm.covidHospitalAdmissionsPer100k)")
+            DetailItemView(name: "Bed Utilization", value: "\(comm.covidInpatientBedUtilization)%")
+            DetailItemView(name: "Report date", value: "\(comm.dateUpdated.formatted(dateStyle: .medium))")
         }
     }
 }

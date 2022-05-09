@@ -45,13 +45,17 @@ struct PageView: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 0) {
                     ForEach(loc.comm.historical) { historicalComm in
-                        HistoricalCardView(comm: historicalComm)
+                        HistoricalCommunityView(comm: historicalComm)
                     }
                 }
                 Divider()
+                Text("Updated weekly")
+                    .font(.body)
                 CommunityDetailsView(comm: loc.comm)
                     .padding([.leading, .trailing])
                 Divider()
+                Text("Updated daily")
+                    .font(.body)
                 TransmissionDetailsView(trans: loc.trans)
                     .padding([.leading, .trailing, .bottom])
             }
@@ -61,6 +65,6 @@ struct PageView: View {
 
 struct PageView_Previews: PreviewProvider {
     static var previews: some View {
-        PageView(loc: Location.example)
+        PageView(loc: Location.exampleWithData)
     }
 }

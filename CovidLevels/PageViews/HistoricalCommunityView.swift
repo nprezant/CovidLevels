@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HistoricalCardView: View {
+struct HistoricalCommunityView: View {
     let comm: CommunityData
     var body: some View {
         HStack {
@@ -26,6 +26,6 @@ struct HistoricalCardView: View {
 
 struct HistoricalCardView_Previews: PreviewProvider {
     static var previews: some View {
-        HistoricalCardView(comm: CommunityData.exampleData.first!)
+        HistoricalCommunityView(comm: CommunityData.exampleData.first!)
     }
 }

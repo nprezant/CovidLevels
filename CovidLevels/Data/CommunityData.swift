@@ -109,8 +109,8 @@ fileprivate func levelColor(level: String) -> Color {
     switch level.lowercased() {
     case "low":
         return Color(hex: 0x90ee90)
-    case "med","moderate":
-        return Color(hex: 0xfffdaf)
+    case "med","medium","moderate":
+        return Color(hex: 0xeed971)
     case "substantial":
         return Color(hex: 0xff9d5c)
     case "high":
@@ -126,11 +126,6 @@ fileprivate func secondsInDays(days: Int) -> Double {
 
 fileprivate func secondsInDays(weeks: Int) -> Double {
     return secondsInDays(days: weeks * 7)
-}
-
-enum SerializationError: Error {
-    case missing(String)
-    case invalid(String, Any)
 }
 
 extension Dictionary where Key == String {
@@ -222,7 +217,12 @@ extension TransmissionData {
         
     static func requestList(state: String, county: String, completion: @escaping ([TransmissionData]) -> Void) {
         var urlComponents = URLComponents(string: "https://data.cdc.gov/resource/8396-v7yb.json")!
-        urlComponents.queryItems = [URLQueryItem(name: "state_name", value: state), URLQueryItem(name: "county_name", value: county)]
+        urlComponents.queryItems = [
+            URLQueryItem(name: "state_name", value: state),
+            URLQueryItem(name: "county_name", value: county),
+            URLQueryItem(name: "$order", value: "report_date DESC"),
+            URLQueryItem(name: "$limit", value: "28"), // four weeks
+        ]
         let url = urlComponents.url!
         
         var request = URLRequest(url: url)
@@ -271,6 +271,10 @@ extension CommunityData {
         let healthServiceAreaPopulation = json.extract("health_service_area_population", conversionFunc: Int.init)
         let healthServiceAreaNumber = json.extract("health_service_area_number", conversionFunc: Int.init)
         
+        let covidInpatientBedUtilization = json.extract("covid_inpatient_bed_utilization", conversionFunc: Double.init)
+        let covidHospitalAdmissionsPer100k = json.extract("covid_hospital_admissions_per_100k", conversionFunc: Double.init)
+        let covidCasesPer100k = json.extract("covid_cases_per_100k", conversionFunc: Double.init)
+        
         let date = json.extract("date_updated", conversionFunc: Date.fromSocrataFloatingTimestamp)
         
         // Initialize properties
@@ -301,12 +305,26 @@ extension CommunityData {
         if let healthServiceAreaNumber = healthServiceAreaNumber {
             self.healthServiceAreaNumber = healthServiceAreaNumber
         }
+        if let covidInpatientBedUtilization = covidInpatientBedUtilization {
+            self.covidInpatientBedUtilization = covidInpatientBedUtilization
+        }
+        if let covidHospitalAdmissionsPer100k = covidHospitalAdmissionsPer100k {
+            self.covidHospitalAdmissionsPer100k = covidHospitalAdmissionsPer100k
+        }
+        if let covidCasesPer100k = covidCasesPer100k {
+            self.covidCasesPer100k = covidCasesPer100k
+        }
         self.historical = [] // Not handled by the json reader. The json reader just reads a single instance.
     }
         
     static func requestList(state: String, county: String, completion: @escaping ([CommunityData]) -> Void) {
         var urlComponents = URLComponents(string: "https://data.cdc.gov/resource/3nnm-4jni.json")!
-        urlComponents.queryItems = [URLQueryItem(name: "state", value: state), URLQueryItem(name: "county", value: county)]
+        urlComponents.queryItems = [
+            URLQueryItem(name: "state", value: state),
+            URLQueryItem(name: "county", value: county),
+            URLQueryItem(name: "$order", value: "date_updated DESC"),
+            URLQueryItem(name: "$limit", value: "10"), // ten weeks
+        ]
         let url = urlComponents.url!
         
         var request = URLRequest(url: url)

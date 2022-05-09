@@ -64,4 +64,10 @@ extension Location {
     static var example: Location {
         return Locations.example.locations.first!
     }
+    static var exampleWithData: Location {
+        let loc = Locations.example.locations.first!
+        loc.comm = CommunityData.exampleData.first!
+        loc.trans = TransmissionData.exampleData.first!
+        return loc
+    }
 }

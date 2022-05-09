@@ -17,6 +17,10 @@ struct HistoricalTransmissionView: View {
                 .frame(height: 10)
             Text(trans.level.uppercased())
                 .font(.body.smallCaps())
+            Spacer()
+                .frame(height: 10)
+            Text(trans.date.formatted(dateStyle: .short))
+                .font(.body)
         }
         .padding()
         .background(trans.levelColor())
