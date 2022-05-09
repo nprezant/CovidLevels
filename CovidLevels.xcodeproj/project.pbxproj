@@ -13,6 +13,9 @@
 		4F41D0432829778B00691E16 /* SearchItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41D0422829778B00691E16 /* SearchItemView.swift */; };
 		4F41D0462829860C00691E16 /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41D0452829860C00691E16 /* SearchItem.swift */; };
 		4F41D0482829861B00691E16 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41D0472829861B00691E16 /* SearchBar.swift */; };
+		4F41D04C2829ABA600691E16 /* ExampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41D04B2829ABA600691E16 /* ExampleData.swift */; };
+		4F41D04E2829AC2500691E16 /* TransmissionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41D04D2829AC2500691E16 /* TransmissionData.swift */; };
+		4F41D0502829AEF200691E16 /* RequestsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41D04F2829AEF200691E16 /* RequestsUtils.swift */; };
 		4F5F043C2824537100FE9A1D /* CovidLevelsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F043B2824537100FE9A1D /* CovidLevelsApp.swift */; };
 		4F5F043E2824537100FE9A1D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F043D2824537100FE9A1D /* ContentView.swift */; };
 		4F5F04402824537300FE9A1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F5F043F2824537300FE9A1D /* Assets.xcassets */; };
@@ -56,6 +59,9 @@
 		4F41D0422829778B00691E16 /* SearchItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemView.swift; sourceTree = "<group>"; };
 		4F41D0452829860C00691E16 /* SearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
 		4F41D0472829861B00691E16 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		4F41D04B2829ABA600691E16 /* ExampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleData.swift; sourceTree = "<group>"; };
+		4F41D04D2829AC2500691E16 /* TransmissionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionData.swift; sourceTree = "<group>"; };
+		4F41D04F2829AEF200691E16 /* RequestsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsUtils.swift; sourceTree = "<group>"; };
 		4F5F04382824537100FE9A1D /* CovidLevels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CovidLevels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F5F043B2824537100FE9A1D /* CovidLevelsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidLevelsApp.swift; sourceTree = "<group>"; };
 		4F5F043D2824537100FE9A1D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -180,7 +186,9 @@
 			isa = PBXGroup;
 			children = (
 				4F5F04A828257D2200FE9A1D /* CommunityData.swift */,
+				4F41D04D2829AC2500691E16 /* TransmissionData.swift */,
 				4F41D03A2828B69200691E16 /* Location.swift */,
+				4F41D04B2829ABA600691E16 /* ExampleData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -211,6 +219,7 @@
 			children = (
 				4F7B489C282870E10041912F /* Utils.swift */,
 				4F41D03C2828BDA900691E16 /* StateNameUtils.swift */,
+				4F41D04F2829AEF200691E16 /* RequestsUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -347,12 +356,15 @@
 			files = (
 				4F41D0462829860C00691E16 /* SearchItem.swift in Sources */,
 				4F5F04AF2825908700FE9A1D /* CommunityDetailsView.swift in Sources */,
+				4F41D04E2829AC2500691E16 /* TransmissionData.swift in Sources */,
 				4F5F04AB2825830C00FE9A1D /* PageView.swift in Sources */,
 				4F5F043E2824537100FE9A1D /* ContentView.swift in Sources */,
 				4F7B4897282867350041912F /* HistoricalTransmissionView.swift in Sources */,
 				4F821ACD28287487000FE997 /* TransmissionDetailsView.swift in Sources */,
+				4F41D0502829AEF200691E16 /* RequestsUtils.swift in Sources */,
 				4F41D03B2828B69200691E16 /* Location.swift in Sources */,
 				4F5F04AD28258AC500FE9A1D /* HistoricalCommunityView.swift in Sources */,
+				4F41D04C2829ABA600691E16 /* ExampleData.swift in Sources */,
 				4F5F04B1282591B100FE9A1D /* DetailItemView.swift in Sources */,
 				4F41D0432829778B00691E16 /* SearchItemView.swift in Sources */,
 				4F5F04A728257CB600FE9A1D /* LocationCardView.swift in Sources */,

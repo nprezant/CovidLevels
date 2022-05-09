@@ -18,6 +18,21 @@ extension Color {
             opacity: alpha
         )
     }
+    
+    init(level: String) {
+        switch level.lowercased() {
+        case "low":
+            self.init(hex: 0x90ee90)
+        case "med","medium","moderate":
+            self.init(hex: 0xeed971)
+        case "substantial":
+            self.init(hex: 0xff9d5c)
+        case "high":
+            self.init(hex: 0xff7f7f)
+        default:
+            self.init(hex: 0xd3d3d3)
+        }
+    }
 }
 
 extension Date {
