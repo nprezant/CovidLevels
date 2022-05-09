@@ -141,9 +141,19 @@ extension Dictionary where Key == String {
         }
         return value
     }
+    
+    func extract<T>(_ key: String, conversionFunc: (String)->T?) -> T? {
+        guard let value = extract(key) else {
+            return nil
+        }
+        return conversionFunc(value)
+    }
 }
 
 extension Date {
+    /// Socrata dates are ISO8601 Times with no timezone offset and three sig figs of millisecond precision
+    /// https://dev.socrata.com/docs/datatypes/floating_timestamp.html
+    /// https://stackoverflow.com/questions/36861732/convert-string-to-date-in-swift
     static func fromSocrataFloatingTimestamp(_ isoDate: String) -> Date? {
         // Interpret the iso date
         let dateFormatter = DateFormatter()
@@ -159,6 +169,12 @@ extension Date {
     }
 }
 
+extension URLRequest {
+    mutating func setSocrataHeader() {
+        self.setValue("X-App-Token", forHTTPHeaderField: "f3fjentqIxjN6C9UkGM3TfzjD")
+    }
+}
+
 extension TransmissionData {
     init(json: [String: Any]) {
         // Extract simple string data
@@ -167,24 +183,14 @@ extension TransmissionData {
         let county = json.extract("county_name")
         let countyFips = json.extract("fips_code")
         
-        var percentPositiveTestsLast7Days: Double?
-        if let x = json.extract("percent_test_results_reported") {
-            percentPositiveTestsLast7Days = Double(x)
-        }
-        
-        // Date is a little special. Socrata dates are ISO8601 Times with no timezone offset
-        // https://dev.socrata.com/docs/datatypes/floating_timestamp.html
-        // https://stackoverflow.com/questions/36861732/convert-string-to-date-in-swift
-        var date: Date?
-        if let x = json.extract("report_date") {
-            date = Date.fromSocrataFloatingTimestamp(x)
-        }
+        let percentPositiveTestsLast7Days = json.extract("percent_test_results_reported", conversionFunc: Double.init)
+        let date = json.extract("report_date", conversionFunc: Date.fromSocrataFloatingTimestamp)
         
         // This value might be 'supressed' if it is positive but less than 10
         var newCasesPer100kLast7Days: Double?
         if let x = json.extract("cases_per_100k_7_day_count") {
             if x == "suppressed" {
-                newCasesPer100kLast7Days = nil // Means 0<x<10
+                newCasesPer100kLast7Days = nil // Means 0 < x < 10
             }
             else {
                 newCasesPer100kLast7Days = Double(x)
@@ -220,7 +226,7 @@ extension TransmissionData {
         let url = urlComponents.url!
         
         var request = URLRequest(url: url)
-        request.setValue("X-App-Token", forHTTPHeaderField: "f3fjentqIxjN6C9UkGM3TfzjD")
+        request.setSocrataHeader()
 
         let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
             var transmissions: [TransmissionData] = []
@@ -246,8 +252,92 @@ extension TransmissionData {
                 return
             }
             var transmission = transmissions.first!
-            transmission.historical = Array(transmissions[1...])
+            transmission.historical = transmissions.count >= 2 ? Array(transmissions[1...]) : []
             completion(transmission)
+        }
+    }
+}
+
+extension CommunityData {
+    init(json: [String: Any]) {
+        // Extract simple string data
+        let state = json.extract("state")
+        let level = json.extract("covid_19_community_level")
+        let county = json.extract("county")
+        let countyFips = json.extract("county_fips")
+        let healthServiceArea = json.extract("health_service_area")
+        
+        let countyPopulation = json.extract("county_population", conversionFunc: Int.init)
+        let healthServiceAreaPopulation = json.extract("health_service_area_population", conversionFunc: Int.init)
+        let healthServiceAreaNumber = json.extract("health_service_area_number", conversionFunc: Int.init)
+        
+        let date = json.extract("date_updated", conversionFunc: Date.fromSocrataFloatingTimestamp)
+        
+        // Initialize properties
+        if let level = level {
+            self.level = level
+        }
+        if let state = state {
+            self.state = state
+        }
+        if let county = county {
+            self.county = county
+        }
+        if let countyFips = countyFips {
+            self.countyFips = countyFips
+        }
+        if let date = date {
+            self.dateUpdated = date
+        }
+        if let healthServiceArea = healthServiceArea {
+            self.healthServiceArea = healthServiceArea
+        }
+        if let countyPopulation = countyPopulation {
+            self.countyPopulation = countyPopulation
+        }
+        if let healthServiceAreaPopulation = healthServiceAreaPopulation {
+            self.healthServiceAreaPopulation = healthServiceAreaPopulation
+        }
+        if let healthServiceAreaNumber = healthServiceAreaNumber {
+            self.healthServiceAreaNumber = healthServiceAreaNumber
+        }
+        self.historical = [] // Not handled by the json reader. The json reader just reads a single instance.
+    }
+        
+    static func requestList(state: String, county: String, completion: @escaping ([CommunityData]) -> Void) {
+        var urlComponents = URLComponents(string: "https://data.cdc.gov/resource/3nnm-4jni.json")!
+        urlComponents.queryItems = [URLQueryItem(name: "state", value: state), URLQueryItem(name: "county", value: county)]
+        let url = urlComponents.url!
+        
+        var request = URLRequest(url: url)
+        request.setSocrataHeader()
+
+        let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
+            var communities: [CommunityData] = []
+            
+            if let data = data,
+               let json = try? JSONSerialization.jsonObject(with: data, options: []) as? Array<[String: Any]> {
+                for item in json {
+                    let community = CommunityData(json: item)
+                    communities.append(community)
+                }
+            }
+            
+            completion(communities)
+        }
+
+        task.resume()
+    }
+    
+    static func request(state: String, county: String, completion: @escaping (CommunityData) -> Void) {
+        CommunityData.requestList(state: state, county: county) { (communities) in
+            if communities.isEmpty {
+                completion(CommunityData())
+                return
+            }
+            var community = communities.first!
+            community.historical = communities.count >= 2 ? Array(communities[1...]) : []
+            completion(community)
         }
     }
 }

@@ -39,6 +39,13 @@ class Location : Identifiable, ObservableObject {
                 self.trans = transmission
             }
         }
+        CommunityData.request(state: state, county: county) { [weak self] community in
+            guard let self = self else { return }
+            debugPrint("Got community data. \(community.healthServiceArea)")
+            DispatchQueue.main.async {
+                self.comm = community
+            }
+        }
     }
 }
 
