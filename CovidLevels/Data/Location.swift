@@ -58,11 +58,26 @@ extension Locations {
         ]
         return locs
     }
+    static var exampleWithData: Locations {
+        let locs = Locations()
+        locs.locations = [
+            Location(state: "Colorado", county: "Larimer County"),
+            Location(state: "North Carolina", county: "Buncombe County")
+        ]
+        locs.locations[0].comm = CommunityData.exampleData.first!
+        locs.locations[0].trans = TransmissionData.exampleData.first!
+        locs.locations[1].comm = CommunityData.exampleData.first!
+        locs.locations[1].trans = TransmissionData.exampleData.first!
+        return locs
+    }
 }
 
 extension Location {
     static var example: Location {
         return Locations.example.locations.first!
+    }
+    static var example2: Location {
+        return Locations.example.locations.last!
     }
     static var exampleWithData: Location {
         let loc = Locations.example.locations.first!

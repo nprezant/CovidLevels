@@ -13,6 +13,8 @@ struct ContentView: View {
     @State var showingDetail: Bool = false
     @State var detailIndex: Int = 0
     
+    @State var showingSearch: Bool = false
+    
     var body: some View {
         if showingDetail {
             VStack {
@@ -23,6 +25,7 @@ struct ContentView: View {
                         showingDetail = false
                     }) {
                         Image(systemName: "list.bullet")
+                            .padding()
                     }
                 }
             }
@@ -36,11 +39,24 @@ struct ContentView: View {
                                 showingDetail = true
                             }
                     }
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            showingSearch = true
+                        }) {
+                            Image(systemName: "magnifyingglass")
+                                .padding()
+                        }
+                    }
                 }
             }
             .onAppear {
                 debugPrint("Requesting all locations")
                 locations.request()
+            }
+            .sheet(isPresented: $showingSearch, onDismiss: { debugPrint("dismissed") }) {
+                LocationSearch()
             }
         }
     }

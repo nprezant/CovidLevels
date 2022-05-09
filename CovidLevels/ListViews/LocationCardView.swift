@@ -14,13 +14,13 @@ struct LocationCardView: View {
             Text("\(location.county.withoutCounty()), \(location.state.toShortStateName())")
                 .font(.body)
             Spacer()
-            Text(location.trans.level)
+            Text(location.comm.level)
                 .font(.body.smallCaps())
                 .padding()
         }
         .foregroundColor(.primary)
         .padding(.leading).padding(.trailing)
-        .background(location.trans.levelColor())
+        .background(location.comm.levelColor())
     }
 }
 
