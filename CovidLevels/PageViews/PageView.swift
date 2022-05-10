@@ -12,32 +12,16 @@ struct PageView: View {
     var body: some View {
         VStack {
             Text("\(loc.county), \(loc.state.asShortStateName)")
-                .font(.title3)
-            Spacer()
-                .frame(height: 10)
-            HStack {
-                Spacer()
-                VStack {
-                    Text(loc.comm.level.uppercased())
-                        .font(.largeTitle)
-                    Text("Community Level")
-                        .font(.caption2)
-                    Text("\(loc.comm.dateUpdated.formatted(dateStyle: .medium))")
-                        .font(.caption2)
-                }
-                Spacer()
-                VStack {
-                    Text(loc.trans.level.uppercased())
-                        .font(.largeTitle)
-                    Text("Transmission Level")
-                        .font(.caption2)
-                    Text("\(loc.trans.date.formatted(dateStyle: .medium))")
-                        .font(.caption2)
-                }
-                Spacer()
+                .font(.title2)
+                .padding()
+            VStack {
+                Text(loc.comm.level.uppercased())
+                    .font(.largeTitle) // TODO make larger
+                Text("Community Level")
+                    .font(.caption)
+                Text("\(loc.comm.dateUpdated.formatted(dateStyle: .medium))")
+                    .font(.caption)
             }
-            Spacer()
-                .frame(height: 20)
             ScrollView(showsIndicators: false) {
                 VStack {
                     Text("Based on the community level, the CDC recommends...")
@@ -71,6 +55,7 @@ struct PageView: View {
                     }
                 }
             }
+            .padding([.top])
         }
     }
 }

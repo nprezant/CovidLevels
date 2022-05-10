@@ -11,7 +11,7 @@ struct HistoricalCommunityView: View {
     let comm: CommunityData
     var body: some View {
         HStack {
-            Text(comm.dateUpdated.formatted(dateStyle: .medium))
+            Text(comm.dateUpdated.formatted(dateStyle: .short))
                 .font(.body)
             Spacer()
             Text(comm.level)
