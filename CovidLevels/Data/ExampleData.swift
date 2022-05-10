@@ -28,13 +28,13 @@ extension TransmissionData {
         [
             LarimerTransmissionData(
                 level: "Low",
-                dateUpdated: Date.now,
+                dateUpdated: Date.today,
                 historical:
                     [
-                        LarimerTransmissionData(level: "low", dateUpdated: Date.now.addingTimeInterval(-secondsInDays(days: 1))),
-                        LarimerTransmissionData(level: "substantial", dateUpdated: Date.now.addingTimeInterval(-secondsInDays(days: 2))),
-                        LarimerTransmissionData(level: "high", dateUpdated: Date.now.addingTimeInterval(-secondsInDays(days: 3))),
-                        LarimerTransmissionData(level: "moderate", dateUpdated: Date.now.addingTimeInterval(-secondsInDays(days: 4))),
+                        LarimerTransmissionData(level: "low", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(days: 1))),
+                        LarimerTransmissionData(level: "substantial", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(days: 2))),
+                        LarimerTransmissionData(level: "high", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(days: 3))),
+                        LarimerTransmissionData(level: "moderate", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(days: 4))),
                     ])
         ]
     }
@@ -45,16 +45,16 @@ extension CommunityData {
         [
             LarimerCommunityData(
                 level: "Low",
-                dateUpdated: Date.now,
+                dateUpdated: Date.today,
                 historical:
                     [
-                        LarimerCommunityData(level: "Low", dateUpdated: Date.now.addingTimeInterval(-secondsInDays(weeks: 1))),
-                        LarimerCommunityData(level: "Med", dateUpdated: Date.now.addingTimeInterval(-secondsInDays(weeks: 2))),
-                        LarimerCommunityData(level: "Med", dateUpdated: Date.now.addingTimeInterval(-secondsInDays(weeks: 3))),
-                        LarimerCommunityData(level: "Med", dateUpdated: Date.now.addingTimeInterval(-secondsInDays(weeks: 4))),
-                        LarimerCommunityData(level: "Med", dateUpdated: Date.now.addingTimeInterval(-secondsInDays(weeks: 5))),
-                        LarimerCommunityData(level: "High", dateUpdated: Date.now.addingTimeInterval(-secondsInDays(weeks: 6))),
-                        LarimerCommunityData(level: "High", dateUpdated: Date.now.addingTimeInterval(-secondsInDays(weeks: 7))),
+                        LarimerCommunityData(level: "Low", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(weeks: 1))),
+                        LarimerCommunityData(level: "Med", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(weeks: 2))),
+                        LarimerCommunityData(level: "Med", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(weeks: 3))),
+                        LarimerCommunityData(level: "Med", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(weeks: 4))),
+                        LarimerCommunityData(level: "Med", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(weeks: 5))),
+                        LarimerCommunityData(level: "High", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(weeks: 6))),
+                        LarimerCommunityData(level: "High", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(weeks: 7))),
                     ])
         ]
     }

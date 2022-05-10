@@ -14,7 +14,7 @@ struct CommunityData : Identifiable {
     static let apiEndpoint: String = "https://data.cdc.gov/resource/3nnm-4jni.json"
     var id = UUID() // Each instance will be uniquely identifiable
     var level: String = "-" // Options: Low, Medium, High
-    var dateUpdated: Date = Date.now
+    var dateUpdated: Date = Date.today
     var county: String = "-"
     var countyFips: String = "-" // Zero padded
     var countyPopulation: Int = -1

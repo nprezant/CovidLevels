@@ -48,6 +48,13 @@ extension Date {
         formatter.timeStyle = timeStyle
         return formatter.string(from: self)
     }
+    
+    static var today: Date {
+        let date = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day, .month, .year], from: date)
+        return calendar.date(from: components)!
+    }
 }
 
 extension String {

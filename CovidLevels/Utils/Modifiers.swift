@@ -8,6 +8,22 @@
 import Foundation
 import SwiftUI
 
+struct Background: ViewModifier {
+    var color: Color
+    func body(content: Content) -> some View {
+        ZStack {
+            content
+            color.ignoresSafeArea()
+        }
+    }
+}
+
+extension View {
+    func backgroundCompatible(_ color: Color) -> some View {
+        modifier(Background(color: color))
+    }
+}
+
 extension CGFloat {
     func clamped(_ lower: CGFloat, _ upper: CGFloat) -> CGFloat {
         return Swift.max(lower, Swift.min(upper, self))
@@ -24,7 +40,7 @@ struct Deletable: ViewModifier {
                     .foregroundColor(.white)
                     .padding()
             }
-            .background(.red)
+            .background(Color.red)
             .offset(x: (50 + offset.width / 2).clamped(0, 50), y: 0)
             .onTapGesture {
                 withAnimation {

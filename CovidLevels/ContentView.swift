@@ -22,7 +22,9 @@ struct ContentView: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        showingDetail = false
+                        withAnimation {
+                            showingDetail = false
+                        }
                     }) {
                         Image(systemName: "list.bullet")
                             .padding()
@@ -36,7 +38,9 @@ struct ContentView: View {
                         LocationCardView(location: self.locations.locations[index])
                             .onTapGesture {
                                 detailIndex = index
-                                showingDetail = true
+                                withAnimation {
+                                    showingDetail = true
+                                }
                             }
                             .deletable() {
                                 withAnimation {
