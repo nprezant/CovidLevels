@@ -41,7 +41,7 @@ struct Deletable: ViewModifier {
                     .padding()
             }
             .background(Color.red)
-            .offset(x: (50 + offset.width / 2).clamped(0, 50), y: 0)
+            .offset(x: (40 + offset.width / 2).clamped(0, 40), y: 0)
             .onTapGesture {
                 withAnimation {
                     offset = CGSize.zero
