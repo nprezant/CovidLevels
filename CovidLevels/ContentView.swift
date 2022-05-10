@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var locations: Locations = Locations.example
+    @StateObject var locations: Locations = .fromFile()
     
     @State var showingDetail: Bool = false
     @State var detailIndex: Int = 0

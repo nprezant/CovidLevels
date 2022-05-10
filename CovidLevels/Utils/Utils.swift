@@ -102,3 +102,10 @@ extension StringProtocol {
         return result
     }
 }
+
+struct FileLocations {
+    public static var documentsFolder: URL {
+        // Apple's eskimo says this try! is okay
+        return try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+    }
+}

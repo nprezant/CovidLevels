@@ -6,21 +6,43 @@
 //
 
 import Foundation
+import os
+
+fileprivate var locationsFileUrl: URL {
+    return FileLocations.documentsFolder.appendingPathComponent("locations.json")
+}
 
 class Locations : ObservableObject {
     @Published var locations: [Location] = []
     
     func add(_ loc: Location) {
         locations.append(loc)
+        save()
     }
     
     func remove(at index: Array.Index) {
         locations.remove(atOffsets: IndexSet([index]))
+        save()
     }
     
     func request() {
         for loc in locations {
             loc.request()
+        }
+    }
+    
+    static func fromFile() -> Locations {
+        let locations: Array<Location> = .init(file: locationsFileUrl)
+        let res = Locations()
+        res.locations = locations
+        return res
+    }
+    
+    private func save() {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let self = self else { return }
+            Logger().info("Saving locations")
+            self.locations.save(file: locationsFileUrl)
         }
     }
 }
@@ -53,6 +75,43 @@ class Location : Identifiable, ObservableObject {
             DispatchQueue.main.async {
                 self.comm = community
             }
+        }
+    }
+}
+
+struct LocationData : Codable {
+    var state: String
+    var county: String
+}
+
+extension Array where Element == Location {
+    init(file: URL) {
+        Logger().info("Loading locations from file: \(file)")
+        guard let data = try? Data(contentsOf: file) else {
+            Logger().info("Locations file does not exist.")
+            self.init(Locations.example.locations)
+            return
+        }
+        guard let locationDataList = try? JSONDecoder().decode(Array<LocationData>.self, from: data) else {
+            Logger().warning("Error decoding locations file. Removing file. Using default locations.")
+            try? FileManager.default.removeItem(at: file)
+            self.init(Locations.example.locations)
+            return
+        }
+        self.init(locationDataList.map{ Location(state: $0.state, county: $0.county) })
+    }
+    
+    func save(file: URL) {
+        Logger().info("Saving locations file: \(file)")
+        let locationDataList = self.map{ LocationData(state: $0.state, county: $0.county) }
+        guard let data = try? JSONEncoder().encode(locationDataList.self) else {
+            Logger().warning("Error encoding locations data.")
+            return
+        }
+        do {
+            try data.write(to: file)
+        } catch {
+            Logger().warning("Error writing to locations data file.")
         }
     }
 }
