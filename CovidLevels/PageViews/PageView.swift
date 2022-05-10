@@ -41,8 +41,9 @@ struct PageView: View {
                     Text("Transmission Data")
                         .font(.body)
                     Text("(Intended for Healthcare Providers)")
-                        .font(.caption2)
+                    Text("Rolling 7 Day Average")
                 }
+                .font(.caption2)
                 .padding([.top, .bottom])
                 TransmissionDetailsView(trans: loc.trans)
                     .padding([.leading, .trailing, .bottom])

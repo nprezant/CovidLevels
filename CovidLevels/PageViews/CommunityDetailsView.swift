@@ -10,12 +10,11 @@ import SwiftUI
 struct CommunityDetailsView: View {
     let comm: CommunityData
     var body: some View {
-        VStack(spacing: 10) {
+        LazyVGrid(columns: Array(repeating: GridItem.init(.flexible()), count: 2)) {
             DetailItemView(name: "Population", value: "\(comm.countyPopulation)")
+            DetailItemView(name: "Inpatient Bed Utilization", value: "\(comm.covidInpatientBedUtilization)%")
             DetailItemView(name: "Cases per 100k", value: "\(comm.covidCasesPer100k)")
             DetailItemView(name: "Hospital Admissions per 100k", value: "\(comm.covidHospitalAdmissionsPer100k)")
-            DetailItemView(name: "Bed Utilization", value: "\(comm.covidInpatientBedUtilization)%")
-//            DetailItemView(name: "Report date", value: "\(comm.dateUpdated.formatted(dateStyle: .medium))")
         }
     }
 }
