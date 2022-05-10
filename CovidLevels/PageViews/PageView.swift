@@ -53,11 +53,13 @@ struct PageView: View {
                     .font(.body)
                 CommunityDetailsView(comm: loc.comm)
                     .padding([.leading, .trailing])
+                    .id(loc.comm.id)
                 Divider()
                 Text("Updated daily")
                     .font(.body)
                 TransmissionDetailsView(trans: loc.trans)
                     .padding([.leading, .trailing, .bottom])
+                    .id(loc.trans.id)
             }
         }
     }
