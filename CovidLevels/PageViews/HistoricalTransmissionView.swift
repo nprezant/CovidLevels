@@ -13,16 +13,12 @@ struct HistoricalTransmissionView: View {
         VStack {
             Text("\(trans.date.formatted("EEEE"))")
                 .font(.caption)
-            Spacer()
-                .frame(height: 10)
             Text(trans.level.uppercased())
                 .font(.body.smallCaps())
-            Spacer()
-                .frame(height: 10)
             Text(trans.date.formatted(dateStyle: .short))
                 .font(.body)
         }
-        .padding()
+        .padding([.leading, .trailing])
         .background(trans.levelColor)
     }
 }

@@ -16,10 +16,9 @@ struct HistoricalCommunityView: View {
             Spacer()
             Text(comm.level)
                 .font(.body.smallCaps())
-                .padding()
         }
         .foregroundColor(.primary)
-        .padding(.leading).padding(.trailing)
+        .padding([.leading, .trailing])
         .background(comm.levelColor)
     }
 }

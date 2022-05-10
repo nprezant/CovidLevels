@@ -89,7 +89,7 @@ extension TransmissionData {
             URLQueryItem(name: "state_name", value: state),
             URLQueryItem(name: "county_name", value: county),
             URLQueryItem(name: "$order", value: "report_date DESC"),
-            URLQueryItem(name: "$limit", value: "28"), // four weeks
+            URLQueryItem(name: "$limit", value: "14"), // two weeks
         ]
         let url = urlComponents.url!
         

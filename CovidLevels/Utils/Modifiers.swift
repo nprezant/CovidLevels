@@ -34,11 +34,11 @@ struct Deletable: ViewModifier {
     var onDelete: (() -> Void)? = nil
     @State private var offset = CGSize.zero
     func body(content: Content) -> some View {
+        // todo use geometry reader...
         ZStack(alignment: .trailing) {
             VStack {
                 Text("Delete")
                     .foregroundColor(.white)
-                    .padding()
             }
             .background(Color.red)
             .offset(x: (40 + offset.width / 2).clamped(0, 40), y: 0)
@@ -59,7 +59,7 @@ struct Deletable: ViewModifier {
                     }
                 }
                 .onEnded { _ in
-                    if abs(offset.width) > 80 {
+                    if abs(offset.width) >= 80 {
                         // leave the translation, option to be deleted
                     } else {
                         withAnimation {

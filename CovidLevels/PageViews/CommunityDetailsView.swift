@@ -15,7 +15,7 @@ struct CommunityDetailsView: View {
             DetailItemView(name: "Cases per 100k", value: "\(comm.covidCasesPer100k)")
             DetailItemView(name: "Hospital Admissions per 100k", value: "\(comm.covidHospitalAdmissionsPer100k)")
             DetailItemView(name: "Bed Utilization", value: "\(comm.covidInpatientBedUtilization)%")
-            DetailItemView(name: "Report date", value: "\(comm.dateUpdated.formatted(dateStyle: .medium))")
+//            DetailItemView(name: "Report date", value: "\(comm.dateUpdated.formatted(dateStyle: .medium))")
         }
     }
 }

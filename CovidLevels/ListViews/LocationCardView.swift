@@ -12,20 +12,23 @@ struct LocationCardView: View {
     var body: some View {
         HStack {
             Text("\(location.county.withoutCounty), \(location.state.asShortStateName)")
-                .font(.body)
+                .font(.title2)
             Spacer()
             Text(location.comm.level)
-                .font(.body.smallCaps())
-                .padding()
+                .font(.largeTitle.smallCaps())
         }
         .foregroundColor(.primary)
-        .padding(.leading).padding(.trailing)
+        .padding([.leading, .trailing])
         .background(location.comm.levelColor)
     }
 }
 
 struct LocationCardView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationCardView(location: Location.example)
+        VStack {
+            LocationCardView(location: Location.exampleWithData)
+            LocationCardView(location: Location.example)
+            LocationCardView(location: Location.example2)
+        }
     }
 }
