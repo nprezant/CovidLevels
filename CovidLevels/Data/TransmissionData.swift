@@ -19,7 +19,7 @@ struct TransmissionData : Identifiable {
     var countyFips: String = "-" // Zero padded
     var date: Date = Date.today
     var percentPositiveTestsLast7Days: Double = -1
-    var newCasesPer100kLast7Days: Double? = nil // May be "suppressed" if number is low but non-zero
+    var newCasesPer100kLast7Days: Double? = -1 // May be "suppressed" if number is low but non-zero
     var historical: [TransmissionData] = []
     
     var levelColor: Color {

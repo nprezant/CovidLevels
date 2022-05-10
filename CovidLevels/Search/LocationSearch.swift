@@ -32,7 +32,7 @@ struct LocationSearch: View {
             ScrollView {
                 ForEach(searchItems) { item in
                     SearchItemView(item: item, searchText: searchText)
-                        .padding([.leading])
+                        .padding([.leading, .top])
                         .onTapGesture {
                             previewLocation = item.location
                             previewLocation?.request()
