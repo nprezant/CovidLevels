@@ -24,6 +24,32 @@ extension View {
     }
 }
 
+struct SizePreferenceKey: PreferenceKey {
+    static var defaultValue: CGSize = .zero
+
+    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
+        value = nextValue()
+    }
+}
+
+struct SizeObserver: ViewModifier {
+    private var sizeView: some View {
+        GeometryReader { geometry in
+            Color.clear.preference(key: SizePreferenceKey.self, value: geometry.size)
+        }
+    }
+
+    func body(content: Content) -> some View {
+        content.background(sizeView)
+    }
+}
+
+extension View {
+    func observesSize() -> some View {
+        modifier(SizeObserver())
+    }
+}
+
 extension CGFloat {
     func clamped(_ lower: CGFloat, _ upper: CGFloat) -> CGFloat {
         return Swift.max(lower, Swift.min(upper, self))
@@ -33,23 +59,30 @@ extension CGFloat {
 struct Deletable: ViewModifier {
     var onDelete: (() -> Void)? = nil
     @State private var offset = CGSize.zero
+    @State private var sz = CGSize.zero
+    var slideWidth: CGFloat {
+        return sz.width * 1/5
+    }
     func body(content: Content) -> some View {
-        // todo use geometry reader...
         ZStack(alignment: .trailing) {
-            VStack {
-                Text("Delete")
-                    .foregroundColor(.white)
-            }
-            .background(Color.red)
-            .offset(x: (40 + offset.width / 2).clamped(0, 40), y: 0)
-            .onTapGesture {
-                withAnimation {
-                    offset = CGSize.zero
+            Text("Delete")
+                .foregroundColor(.white)
+                .frame(width: slideWidth, height: sz.height, alignment: .center)
+                .background(Color.red)
+                .offset(x: (slideWidth / 2 + offset.width / 2).clamped(0, slideWidth / 2), y: 0)
+                .onTapGesture {
+                    withAnimation {
+                        offset = CGSize.zero
+                    }
+                    onDelete?()
                 }
-                onDelete?()
-            }
             content
-                .offset(x: offset.width.clamped(-80, 0), y: 0)
+                .offset(x: offset.width.clamped(-slideWidth, 0), y: 0)
+                .observesSize()
+        }
+        .onPreferenceChange(SizePreferenceKey.self) {
+            print("Incoming deletable item size \($0)")
+            sz = $0
         }
         .gesture(
             DragGesture()
@@ -59,7 +92,7 @@ struct Deletable: ViewModifier {
                     }
                 }
                 .onEnded { _ in
-                    if abs(offset.width) >= 80 {
+                    if abs(offset.width) >= slideWidth {
                         // leave the translation, option to be deleted
                     } else {
                         withAnimation {
