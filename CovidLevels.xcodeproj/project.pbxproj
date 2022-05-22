@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4F41D03B2828B69200691E16 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41D03A2828B69200691E16 /* Location.swift */; };
 		4F41D03D2828BDA900691E16 /* StateNameUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41D03C2828BDA900691E16 /* StateNameUtils.swift */; };
-		4F41D0412829761100691E16 /* LocationSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41D0402829761100691E16 /* LocationSearch.swift */; };
+		4F41D0412829761100691E16 /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41D0402829761100691E16 /* LocationSearchView.swift */; };
 		4F41D0432829778B00691E16 /* SearchItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41D0422829778B00691E16 /* SearchItemView.swift */; };
 		4F41D0462829860C00691E16 /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41D0452829860C00691E16 /* SearchItem.swift */; };
 		4F41D0482829861B00691E16 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F41D0472829861B00691E16 /* SearchBar.swift */; };
@@ -34,6 +34,9 @@
 		4F7B489D282870E10041912F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7B489C282870E10041912F /* Utils.swift */; };
 		4F821ACD28287487000FE997 /* TransmissionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F821ACC28287487000FE997 /* TransmissionDetailsView.swift */; };
 		4F821ACF28289BF3000FE997 /* TransmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F821ACE28289BF3000FE997 /* TransmissionTests.swift */; };
+		4F8D01192832CB0E0004EA3D /* crosswalk.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4F8D01182832CB0E0004EA3D /* crosswalk.txt */; };
+		4F8D011B283416BC0004EA3D /* Crosswalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D011A283416BC0004EA3D /* Crosswalk.swift */; };
+		4FC936BF283978BB00CC726F /* CrosswalkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC936BE283978BB00CC726F /* CrosswalkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +59,7 @@
 /* Begin PBXFileReference section */
 		4F41D03A2828B69200691E16 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		4F41D03C2828BDA900691E16 /* StateNameUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateNameUtils.swift; sourceTree = "<group>"; };
-		4F41D0402829761100691E16 /* LocationSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearch.swift; sourceTree = "<group>"; };
+		4F41D0402829761100691E16 /* LocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchView.swift; sourceTree = "<group>"; };
 		4F41D0422829778B00691E16 /* SearchItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemView.swift; sourceTree = "<group>"; };
 		4F41D0452829860C00691E16 /* SearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
 		4F41D0472829861B00691E16 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -84,6 +87,9 @@
 		4F7B489C282870E10041912F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		4F821ACC28287487000FE997 /* TransmissionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionDetailsView.swift; sourceTree = "<group>"; };
 		4F821ACE28289BF3000FE997 /* TransmissionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionTests.swift; sourceTree = "<group>"; };
+		4F8D01182832CB0E0004EA3D /* crosswalk.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = crosswalk.txt; sourceTree = "<group>"; };
+		4F8D011A283416BC0004EA3D /* Crosswalk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crosswalk.swift; sourceTree = "<group>"; };
+		4FC936BE283978BB00CC726F /* CrosswalkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrosswalkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,10 +120,12 @@
 		4F41D044282985EF00691E16 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				4F41D0402829761100691E16 /* LocationSearch.swift */,
+				4F41D0402829761100691E16 /* LocationSearchView.swift */,
 				4F41D0422829778B00691E16 /* SearchItemView.swift */,
 				4F41D0452829860C00691E16 /* SearchItem.swift */,
 				4F41D0472829861B00691E16 /* SearchBar.swift */,
+				4F8D011A283416BC0004EA3D /* Crosswalk.swift */,
+				4FC936BE283978BB00CC726F /* CrosswalkService.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -145,6 +153,7 @@
 		4F5F043A2824537100FE9A1D /* CovidLevels */ = {
 			isa = PBXGroup;
 			children = (
+				4F8D01172832CAE30004EA3D /* Resources */,
 				4F41D044282985EF00691E16 /* Search */,
 				4F7B489A282870050041912F /* ListViews */,
 				4F7B489928286FE10041912F /* PageViews */,
@@ -225,6 +234,14 @@
 				4F41D0512829D12300691E16 /* Modifiers.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		4F8D01172832CAE30004EA3D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4F8D01182832CB0E0004EA3D /* crosswalk.txt */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,6 +350,7 @@
 			files = (
 				4F5F04432824537300FE9A1D /* Preview Assets.xcassets in Resources */,
 				4F5F04402824537300FE9A1D /* Assets.xcassets in Resources */,
+				4F8D01192832CB0E0004EA3D /* crosswalk.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +375,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FC936BF283978BB00CC726F /* CrosswalkService.swift in Sources */,
 				4F41D0462829860C00691E16 /* SearchItem.swift in Sources */,
 				4F5F04AF2825908700FE9A1D /* CommunityDetailsView.swift in Sources */,
 				4F41D04E2829AC2500691E16 /* TransmissionData.swift in Sources */,
@@ -370,12 +389,13 @@
 				4F41D04C2829ABA600691E16 /* ExampleData.swift in Sources */,
 				4F5F04B1282591B100FE9A1D /* DetailItemView.swift in Sources */,
 				4F41D0432829778B00691E16 /* SearchItemView.swift in Sources */,
+				4F8D011B283416BC0004EA3D /* Crosswalk.swift in Sources */,
 				4F5F04A728257CB600FE9A1D /* LocationCardView.swift in Sources */,
 				4F7B489D282870E10041912F /* Utils.swift in Sources */,
 				4F5F04A928257D2200FE9A1D /* CommunityData.swift in Sources */,
 				4F41D0522829D12300691E16 /* Modifiers.swift in Sources */,
 				4F41D03D2828BDA900691E16 /* StateNameUtils.swift in Sources */,
-				4F41D0412829761100691E16 /* LocationSearch.swift in Sources */,
+				4F41D0412829761100691E16 /* LocationSearchView.swift in Sources */,
 				4F41D0482829861B00691E16 /* SearchBar.swift in Sources */,
 				4F5F043C2824537100FE9A1D /* CovidLevelsApp.swift in Sources */,
 			);

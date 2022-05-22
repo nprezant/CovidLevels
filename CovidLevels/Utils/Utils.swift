@@ -77,6 +77,9 @@ extension String {
         let end = index(start, offsetBy: range.upperBound - range.lowerBound)
         return String(self[start ..< end])
     }
+    func matches(regex: String, options: CompareOptions = []) -> Bool {
+        return self.range(of: regex, options: options.union(.regularExpression), range: nil, locale: nil) != nil
+    }
 }
 
 extension StringProtocol {
@@ -107,5 +110,12 @@ struct FileLocations {
     public static var documentsFolder: URL {
         // Apple's eskimo says this try! is okay
         return try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+    }
+}
+
+extension Sequence where Iterator.Element: Hashable {
+    func distinct() -> [Iterator.Element] {
+        var seen: Set<Iterator.Element> = []
+        return filter { seen.insert($0).inserted }
     }
 }

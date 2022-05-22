@@ -92,4 +92,8 @@ extension String {
     var withoutCounty: String {
         return self.replacingOccurrences(of: " County", with: "")
     }
+    
+    var withCounty: String {
+        return "\(self) County"
+    }
 }

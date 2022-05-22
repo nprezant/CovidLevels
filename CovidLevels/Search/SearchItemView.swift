@@ -29,7 +29,7 @@ struct SearchItemView: View {
         return labelChars
     }
     var body: some View {
-        ScrollView(.horizontal) {
+        ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 0) {
                 ForEach(labelCharacters) { labelChar in
                     Text(labelChar.character)
