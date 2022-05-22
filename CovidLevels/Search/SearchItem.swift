@@ -65,7 +65,10 @@ extension SearchItem {
         CrosswalkService.shared.start()
         
         // When no text is provided, provide no suggestions
-        if searchText.isEmpty || searchText.count < 2 { return }
+        if searchText.isEmpty || searchText.count < 2 {
+            completion([])
+            return
+        }
         
         print("Searching \(searchText)")
         
@@ -75,34 +78,33 @@ extension SearchItem {
         
         // If this looks like a zip code, don't try to treat it as a state or county
         if isPossibleZipCode {
-            CrosswalkService.shared.find(text: searchText, type: .zip, limit: searchListLength) { zipCodeMatches in
-                completion(zipCodeMatches.map{ SearchItem(location: Location(state: $0.stateAbbreviation.asLongStateName, county: $0.county), crosswalk: $0.zctaCode)})
+            CrosswalkService.shared.find(text: searchText, types: [.zip], limit: searchListLength) { zipCodeMatches in
+                completion(zipCodeMatches.asSearchItems)
             }
             return
         }
         
-        // Try to match on the city name. TODO need to search both simultaniously bc async issuese
+        // Try to match on the city name
         if isPossibleCity {
-            CrosswalkService.shared.find(text: searchText, type: .city, limit: searchListLength - Int(searchListLength / 2)) { cityMatches in
-                CrosswalkService.shared.find(text: searchText, type: .county, limit: searchListLength - cityMatches.count) { countyMatches in
-                    completion(cityMatches.mapToSearchItems(crosswalkGetter: {$0.zctaName}) + countyMatches.mapToSearchItems())
-                }
+            CrosswalkService.shared.find(text: searchText, types: [.city, .county], limit: searchListLength) { matches in
+                completion(matches.asSearchItems)
             }
             return
         }
         
-        CrosswalkService.shared.find(text: searchText, type: .county, limit: searchListLength) { countyMatches in
-            completion(countyMatches.mapToSearchItems(crosswalkGetter: {$0.county}))
+        // This shouldn't happen, but just search for county as a backup
+        CrosswalkService.shared.find(text: searchText, types: [.county], limit: searchListLength) { countyMatches in
+            completion(countyMatches.asSearchItems)
         }
     }
 }
     
 extension Array where Element == Crosswalk {
-    func mapToSearchItems(crosswalkGetter: ((Crosswalk) -> String?) = {_ in return nil}) -> [SearchItem] {
+    var asSearchItems: [SearchItem] {
         return self.map{
             SearchItem(
                 location: Location(state: $0.stateAbbreviation.asLongStateName, county: $0.county.withCounty),
-                crosswalk: crosswalkGetter($0))
+                crosswalk: $0.foundWith)
         }
     }
 }

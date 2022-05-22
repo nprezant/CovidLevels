@@ -27,14 +27,55 @@ class CrosswalkService {
         }
     }
     
+//    struct SearchTerm {
+//        let regex: String
+//        let limit: Int
+//        let compareWith: ((Crosswalk) -> [String]) // Values in the crosswalk to compare to
+//        let completion: (([Crosswalk]) -> Void)
+//
+//        init(text: String, type: SearchType, limit: Int, completion: @escaping (([Crosswalk]) -> Void)) {
+//            let (regex, compareWith) = type.info(text: text)
+//            self.regex = regex
+//            self.limit = limit
+//            self.compareWith = compareWith
+//            self.completion = completion
+//        }
+//    }
+//
+//    func find(text: String, type: SearchType, limit: Int, completion: @escaping (([Crosswalk]) -> Void)) {
+//        find(SearchTerm(text: text, type: type, limit: limit, completion: completion))
+//    }
+    
     struct SearchTerm {
-        let regex: String
+        let text: String
+        let types: Set<SearchType>
         let limit: Int
-        let getter: ((Crosswalk) -> String)
         let completion: (([Crosswalk]) -> Void)
     }
+
+    func find(text: String, types: Set<SearchType>, limit: Int, completion: @escaping (([Crosswalk]) -> Void)) {
+        find(SearchTerm(text: text, types: types, limit: limit, completion: completion))
+    }
     
-    private func find(_ st: SearchTerm) {
+//    struct SearchTerm {
+//        let text: String
+//        let types: SearchVariables
+//        let limit: Int
+//        let completion: (([Crosswalk]) -> Void)
+//
+//        init(text: String, types: SearchVariables, limit: Int, completion: @escaping (([Crosswalk]) -> Void)) {
+//            self.text = text
+//            self.limit = limit
+//            self.types = types
+//            self.completion = completion
+//        }
+//    }
+//
+//    func find(text: String, types: SearchVariables, limit: Int, completion: @escaping (([Crosswalk]) -> Void)) {
+//        find(SearchTerm(text: text, types: types, limit: limit, completion: completion))
+//    }
+    
+    func find(_ st: SearchTerm) {
         // Cannot start a find operation if no data is loaded or if service is currently finding something else
         // Instead, queue the search to be looked at next
         if !isStarted || isSearching {
@@ -46,19 +87,30 @@ class CrosswalkService {
         isSearching = true
         
         DispatchQueue.global(qos: .userInitiated).async { [self] in
-            var found: Set<Crosswalk> = []
-            for cw in crosswalkRows {
-                if st.getter(cw).matches(regex: st.regex, options: .caseInsensitive) {
-                    found.insert(cw)
-                    if found.count >= st.limit {
-                        break
-                    }
-                }
-            }
+            let found = findCore(st)
             isSearching = false
             st.completion(Array(found))
             findFromQueue()
         }
+    }
+    
+    private func findCore(_ st: SearchTerm) -> Set<Crosswalk> {
+        var found: Set<Crosswalk> = []
+        let infos = st.types.map{ $0.info(text: st.text) }
+        for cw in crosswalkRows {
+            let compareData = infos.map { ($0.getCompareField(cw), $0.regex, $0.includeCrosswalk) }
+            let matches = compareData.filter{ field, regex, _ in field.matches(regex: regex, options: .caseInsensitive) }
+            if !matches.isEmpty {
+                let (success, item) = found.insert(cw)
+                if success, let match = matches.first {
+                    item.foundWith = match.2 ? match.0 : nil
+                }
+                if found.count >= st.limit {
+                    break
+                }
+            }
+        }
+        return found
     }
     
     private func findFromQueue() {
@@ -68,26 +120,21 @@ class CrosswalkService {
         }
     }
     
-    enum SearchType {
+    enum SearchType : Int {
         case zip
         case city
         case county
         
-        func info(text: String) -> (regex: String, crosswalkGetter: ((Crosswalk) -> String)) {
+        func info(text: String) -> (regex: String, getCompareField: ((Crosswalk) -> String), includeCrosswalk: Bool) {
             switch self {
             case .zip:
-                return ("\(text)\\d*", {$0.zctaCode})
+                return ("\(text)\\d*", {$0.zctaCode}, true)
             case .city:
-                return ("\(text).*", {$0.zctaName})
+                return ("\(text).*", {$0.zctaName}, true)
             case .county:
-                return ("\(text).*", {$0.county})
+                return ("\(text).*", {$0.county}, false)
             }
         }
-    }
-    
-    func find(text: String, type: SearchType, limit: Int, completion: @escaping (([Crosswalk]) -> Void)) {
-        let (regex, getter) = type.info(text: text)
-        find(SearchTerm(regex: regex, limit: limit, getter: getter, completion: completion))
     }
 }
 

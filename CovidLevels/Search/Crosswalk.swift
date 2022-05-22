@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Crosswalk : Hashable, Equatable {
+class Crosswalk : Hashable, Equatable {
     let stateCode: Int
     let zctaCode: String
     let countyCode: Int
@@ -16,6 +16,8 @@ struct Crosswalk : Hashable, Equatable {
     let placeName: String
     let zctaName: String
     let county: String
+    
+    var foundWith: String? = nil
     
     static func == (lhs: Crosswalk, rhs: Crosswalk) -> Bool {
         return lhs.county == rhs.county
