@@ -62,18 +62,18 @@ class Location : Identifiable, ObservableObject {
     }
     
     func request() {
-        TransmissionData.request(state: state, county: county) { [weak self] transmission in
-            guard let self = self else { return }
-            debugPrint("Got transmission data. \(self.county), \(self.state): \(transmission.level)")
-            DispatchQueue.main.async {
-                self.trans = transmission
-            }
-        }
         CommunityData.request(state: state, county: county) { [weak self] community in
             guard let self = self else { return }
             debugPrint("Got community data. \(self.county), \(self.state): \(community.level)")
             DispatchQueue.main.async {
                 self.comm = community
+            }
+        }
+        TransmissionData.request(state: state, county: county) { [weak self] transmission in
+            guard let self = self else { return }
+            debugPrint("Got transmission data. \(self.county), \(self.state): \(transmission.level)")
+            DispatchQueue.main.async {
+                self.trans = transmission
             }
         }
     }
