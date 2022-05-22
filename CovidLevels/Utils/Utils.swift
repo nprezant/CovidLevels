@@ -35,6 +35,35 @@ extension Color {
     }
 }
 
+extension String {
+    static func cdcRecommendations(level: String) -> [String] {
+        switch level.lowercased() {
+        case "low":
+            return [
+                "Stay up to date with COVID-19 vaccines",
+                "Get tested if you have symptoms",
+            ]
+        case "medium":
+            return [
+                "If you are at high risk for severe illness, talk to your healthcare provider about whether you need to wear a mask and take other precautions",
+                "Stay up to date with COVID-19 vaccines",
+                "Get tested if you have symptoms",
+            ]
+        case "high":
+            return [
+                "Wear a mask indoors in public",
+                "Stay up to date with COVID-19 vaccines",
+                "Get tested if you have symptoms",
+                "Additional precautions may be needed for people at high risk for severe illness",
+            ]
+        default:
+            return [
+                "No CDC recommendations found for the '\(level)' level.",
+            ]
+        }
+    }
+}
+
 extension Date {
     func formatted(_ format: String) -> String {
         let formatter = DateFormatter()

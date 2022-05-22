@@ -23,10 +23,15 @@ struct PageView: View {
                     .font(.caption)
             }
             ScrollView(showsIndicators: false) {
-                VStack {
-                    Text("Based on the community level, the CDC recommends...")
-                        .font(.body)
+                VStack(alignment: .leading) {
+                    ForEach(String.cdcRecommendations(level: loc.comm.level), id: \.self) { recommendation in
+                        Text("- \(recommendation)")
+                            .font(.body)
+                    }
+                    Link("More info", destination: URL(string: "https://www.cdc.gov/coronavirus/2019-ncov/your-health/covid-by-county.html")!)
+                        .font(.subheadline)
                 }
+                .padding()
                 Spacer()
                     .frame(height: 20)
                 CommunityDetailsView(comm: loc.comm)
