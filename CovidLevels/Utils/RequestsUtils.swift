@@ -29,11 +29,14 @@ extension Date {
     /// https://dev.socrata.com/docs/datatypes/floating_timestamp.html
     /// https://stackoverflow.com/questions/36861732/convert-string-to-date-in-swift
     static func fromSocrataFloatingTimestamp(_ isoDate: String) -> Date? {
-        // Interpret the iso date
+        // Interpret the iso date. This method works for some dates.
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
-        guard let date = dateFormatter.date(from: isoDate) else { return nil }
+        dateFormatter.dateFormat = isoDate.hasSuffix("Z") ? "yyyy-MM-dd'T'HH:mm:ss.SSSZ" : "yyyy-MM-dd'T'HH:mm:ss.SSS"
+        guard let date = dateFormatter.date(from: isoDate) else {
+            print("Iso date interpretation failed. \(isoDate)")
+            return nil
+        }
 
         // Now for the current timezone
         let calendar = Calendar.current

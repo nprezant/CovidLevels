@@ -8,10 +8,11 @@
 import Foundation
 import SwiftUI
 
-struct CommunityData : Identifiable {
+struct CommunityData : Identifiable, Codable {
     // Data source: https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni
     // Updated weekly
     static let apiEndpoint: String = "https://data.cdc.gov/resource/3nnm-4jni.json"
+    static let apiEndpointId: String = "3nnm-4jni"
     var id = UUID() // Each instance will be uniquely identifiable
     var level: String = "-" // Options: Low, Medium, High
     var dateUpdated: Date = Date.today
@@ -121,7 +122,7 @@ extension CommunityData {
         task.resume()
     }
     
-    static func request(state: String, county: String, completion: @escaping (CommunityData) -> Void) {
+    static func requestUpdate(state: String, county: String, completion: @escaping (CommunityData) -> Void) {
         CommunityData.requestList(state: state, county: county) { (communities) in
             if communities.isEmpty {
                 completion(CommunityData())
@@ -130,6 +131,37 @@ extension CommunityData {
             var community = communities.first!
             community.historical = communities.count >= 2 ? Array(communities[1...]) : []
             completion(community)
+        }
+    }
+    
+    static func request(state: String, county: String, completion: @escaping (CommunityData) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+        
+            // Name of stored data
+            let cacheName = "\(state)-\(county).cache".replacingOccurrences(of: " ", with: "-")
+            
+            // Read in stored data. If there is no data stored, we'll need to update
+            guard let cache : DataCache<CommunityData> = DataCacheService.getCache(cacheName) else {
+                requestUpdate(state: state, county: county) { data in
+                    DataCacheService.save(data, name: cacheName)
+                    completion(data)
+                }
+                return
+            }
+            
+            // Okay, so we have some stored data. If it is up to date we can use it.
+            // If it is out of date we'll need to update it.
+            EndpointStatusChecker.shared.check(id: CommunityData.apiEndpointId, against: cache.modificationDate) { status in
+                switch status {
+                case .UpToDate:
+                    completion(cache.data)
+                case .OutOfDate:
+                    requestUpdate(state: state, county: county) { data in
+                        DataCacheService.save(data, name: cacheName)
+                        completion(data)
+                    }
+                }
+            }
         }
     }
 }

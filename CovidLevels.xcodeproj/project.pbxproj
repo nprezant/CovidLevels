@@ -37,6 +37,8 @@
 		4F8D01192832CB0E0004EA3D /* crosswalk.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4F8D01182832CB0E0004EA3D /* crosswalk.txt */; };
 		4F8D011B283416BC0004EA3D /* Crosswalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D011A283416BC0004EA3D /* Crosswalk.swift */; };
 		4FC936BF283978BB00CC726F /* CrosswalkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC936BE283978BB00CC726F /* CrosswalkService.swift */; };
+		4FC936C3283AAFD700CC726F /* DataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC936C2283AAFD700CC726F /* DataCache.swift */; };
+		4FF01E08283B3C6A005DA1CC /* EndpointStatusChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF01E07283B3C6A005DA1CC /* EndpointStatusChecker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +92,8 @@
 		4F8D01182832CB0E0004EA3D /* crosswalk.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = crosswalk.txt; sourceTree = "<group>"; };
 		4F8D011A283416BC0004EA3D /* Crosswalk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crosswalk.swift; sourceTree = "<group>"; };
 		4FC936BE283978BB00CC726F /* CrosswalkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrosswalkService.swift; sourceTree = "<group>"; };
+		4FC936C2283AAFD700CC726F /* DataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCache.swift; sourceTree = "<group>"; };
+		4FF01E07283B3C6A005DA1CC /* EndpointStatusChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointStatusChecker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +204,8 @@
 				4F41D04D2829AC2500691E16 /* TransmissionData.swift */,
 				4F41D03A2828B69200691E16 /* Location.swift */,
 				4F41D04B2829ABA600691E16 /* ExampleData.swift */,
+				4FC936C2283AAFD700CC726F /* DataCache.swift */,
+				4FF01E07283B3C6A005DA1CC /* EndpointStatusChecker.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -383,6 +389,7 @@
 				4F5F043E2824537100FE9A1D /* ContentView.swift in Sources */,
 				4F7B4897282867350041912F /* HistoricalTransmissionView.swift in Sources */,
 				4F821ACD28287487000FE997 /* TransmissionDetailsView.swift in Sources */,
+				4FC936C3283AAFD700CC726F /* DataCache.swift in Sources */,
 				4F41D0502829AEF200691E16 /* RequestsUtils.swift in Sources */,
 				4F41D03B2828B69200691E16 /* Location.swift in Sources */,
 				4F5F04AD28258AC500FE9A1D /* HistoricalCommunityView.swift in Sources */,
@@ -396,6 +403,7 @@
 				4F41D0522829D12300691E16 /* Modifiers.swift in Sources */,
 				4F41D03D2828BDA900691E16 /* StateNameUtils.swift in Sources */,
 				4F41D0412829761100691E16 /* LocationSearchView.swift in Sources */,
+				4FF01E08283B3C6A005DA1CC /* EndpointStatusChecker.swift in Sources */,
 				4F41D0482829861B00691E16 /* SearchBar.swift in Sources */,
 				4F5F043C2824537100FE9A1D /* CovidLevelsApp.swift in Sources */,
 			);

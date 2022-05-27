@@ -15,12 +15,19 @@ fileprivate func LarimerCommunityData(level: String, dateUpdated: Date, historic
     return CommunityData(level: level, dateUpdated: dateUpdated, county: "Larimer County", countyFips: "08069", countyPopulation: 356899, state: "Colorado", healthServiceArea: "Larimer, CO", healthServiceAreaNumber: 796, healthServiceAreaPopulation: 356899, covidCasesPer100k: 233.96, covidHospitalAdmissionsPer100k: 11.5, covidInpatientBedUtilization: 5.7, historical: historical)
 }
 
-fileprivate func secondsInDays(days: Int) -> Double {
-    return Double(60 * 60 * 24 * days)
-}
-
-fileprivate func secondsInDays(weeks: Int) -> Double {
-    return secondsInDays(days: weeks * 7)
+extension TimeInterval {
+    static func minutes(_ minutes: Int) -> TimeInterval {
+        return TimeInterval(60 * minutes)
+    }
+    static func hours(_ hours: Int) -> TimeInterval {
+        return minutes(60 * hours)
+    }
+    static func days(_ days: Int) -> TimeInterval {
+        return hours(24 * days)
+    }
+    static func weeks(_ weeks: Int) -> TimeInterval {
+        return days(7 * weeks)
+    }
 }
 
 extension TransmissionData {
@@ -31,10 +38,10 @@ extension TransmissionData {
                 dateUpdated: Date.today,
                 historical:
                     [
-                        LarimerTransmissionData(level: "low", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(days: 1))),
-                        LarimerTransmissionData(level: "substantial", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(days: 2))),
-                        LarimerTransmissionData(level: "high", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(days: 3))),
-                        LarimerTransmissionData(level: "moderate", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(days: 4))),
+                        LarimerTransmissionData(level: "low", dateUpdated: Date.today.addingTimeInterval(-.days(1))),
+                        LarimerTransmissionData(level: "substantial", dateUpdated: Date.today.addingTimeInterval(-.days(2))),
+                        LarimerTransmissionData(level: "high", dateUpdated: Date.today.addingTimeInterval(-.days(3))),
+                        LarimerTransmissionData(level: "moderate", dateUpdated: Date.today.addingTimeInterval(-.days(4))),
                     ])
         ]
     }
@@ -48,13 +55,13 @@ extension CommunityData {
                 dateUpdated: Date.today,
                 historical:
                     [
-                        LarimerCommunityData(level: "Low", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(weeks: 1))),
-                        LarimerCommunityData(level: "Med", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(weeks: 2))),
-                        LarimerCommunityData(level: "Med", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(weeks: 3))),
-                        LarimerCommunityData(level: "Med", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(weeks: 4))),
-                        LarimerCommunityData(level: "Med", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(weeks: 5))),
-                        LarimerCommunityData(level: "High", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(weeks: 6))),
-                        LarimerCommunityData(level: "High", dateUpdated: Date.today.addingTimeInterval(-secondsInDays(weeks: 7))),
+                        LarimerCommunityData(level: "Low", dateUpdated: Date.today.addingTimeInterval(-.weeks(1))),
+                        LarimerCommunityData(level: "Med", dateUpdated: Date.today.addingTimeInterval(-.weeks(2))),
+                        LarimerCommunityData(level: "Med", dateUpdated: Date.today.addingTimeInterval(-.weeks(3))),
+                        LarimerCommunityData(level: "Med", dateUpdated: Date.today.addingTimeInterval(-.weeks(4))),
+                        LarimerCommunityData(level: "Med", dateUpdated: Date.today.addingTimeInterval(-.weeks(5))),
+                        LarimerCommunityData(level: "High", dateUpdated: Date.today.addingTimeInterval(-.weeks(6))),
+                        LarimerCommunityData(level: "High", dateUpdated: Date.today.addingTimeInterval(-.weeks(7))),
                     ])
         ]
     }

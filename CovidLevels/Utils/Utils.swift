@@ -84,6 +84,17 @@ extension Date {
         let components = calendar.dateComponents([.day, .month, .year], from: date)
         return calendar.date(from: components)!
     }
+    
+    static var now: Date {
+        let date = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day, .month, .year, .hour, .minute, .second], from: date)
+        return calendar.date(from: components)!
+    }
+    
+    func isOutOfDate(with other: Date) {
+        
+    }
 }
 
 extension String {
