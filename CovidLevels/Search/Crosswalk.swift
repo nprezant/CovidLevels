@@ -22,12 +22,11 @@ class Crosswalk : Hashable, Equatable {
     static func == (lhs: Crosswalk, rhs: Crosswalk) -> Bool {
         return lhs.county == rhs.county
             && lhs.stateCode == rhs.stateCode
-            && lhs.zctaName == rhs.zctaName
     }
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(county)
         hasher.combine(stateCode)
-        hasher.combine(zctaName)
     }
     
     init?(fromLine line: String) {
