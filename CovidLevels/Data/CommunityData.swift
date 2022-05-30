@@ -128,7 +128,7 @@ struct CommunityData : SocrataDataSource {
                 return
             }
             var community = communities.first!
-            community.historical = communities.count >= 2 ? Array(communities[1...]) : []
+            community.historical = Array(communities)
             completion(community)
         }
     }

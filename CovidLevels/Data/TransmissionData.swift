@@ -120,7 +120,7 @@ struct TransmissionData : SocrataDataSource {
                 return
             }
             var transmission = transmissions.first!
-            transmission.historical = transmissions.count >= 2 ? Array(transmissions[1...]) : []
+            transmission.historical = Array(transmissions)
             completion(transmission)
         }
     }

@@ -54,7 +54,7 @@ class EndpointStatusChecker {
         // If this endpoint is already known and it has been checked recently, there is no need to do anything
         if let endpoint = endpoints[id] {
             if endpoint.lastChecked.timeIntervalSinceNow > -EndpointStatusChecker.minCheckInterval {
-                print("Endpoint checked recently. No need to re-check.")
+                print("Endpoint \(id) checked recently. No need to re-check.")
                 completion(endpoint)
                 return
             }
@@ -62,7 +62,7 @@ class EndpointStatusChecker {
 
         // The endpoint is not known or it hasn't been checked in a while. Required to check the server.
         checkLastServerUpdate(id: id) { [self] date in
-            print("Rechecked endpoint status. Last updated \(String(describing: date))")
+            print("Rechecked endpoint \(id) status. Last updated \(String(describing: date))")
             guard let date = date else {
                 completion(nil)
                 return
