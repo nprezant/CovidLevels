@@ -45,7 +45,7 @@ struct LocationSearch: View {
             // https://developer.apple.com/forums/thread/652080
             let _ = "\(previewLocation?.state ?? "none")"
         }
-        .sheet(isPresented: $showingPreview, onDismiss: { debugPrint("location preview dismissed") }) {
+        .sheet(isPresented: $showingPreview, onDismiss: { print("Location preview dismissed") }) {
             if let previewLocation = previewLocation {
                 ZStack {
                     PageView(loc: previewLocation)

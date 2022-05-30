@@ -61,10 +61,10 @@ struct ContentView: View {
                 }
             }
             .onAppear {
-                debugPrint("Requesting all locations")
+                print("Requesting all locations")
                 locations.request()
             }
-            .sheet(isPresented: $showingSearch, onDismiss: { debugPrint("dismissed") }) {
+            .sheet(isPresented: $showingSearch, onDismiss: { print("Search dismissed") }) {
                 LocationSearch() { loc in
                     locations.add(loc)
                     showingSearch = false

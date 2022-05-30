@@ -10,7 +10,7 @@ import Foundation
 extension Dictionary where Key == String {
     func extract(_ key: String) -> String? {
         guard let value = self[key] as? String else {
-            debugPrint("Value missing from dictionary: \(key)")
+            print("Value missing from dictionary: \(key)")
             return nil
         }
         return value
