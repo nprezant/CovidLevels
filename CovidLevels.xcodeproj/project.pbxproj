@@ -34,6 +34,7 @@
 		4F7B489D282870E10041912F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7B489C282870E10041912F /* Utils.swift */; };
 		4F821ACD28287487000FE997 /* TransmissionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F821ACC28287487000FE997 /* TransmissionDetailsView.swift */; };
 		4F821ACF28289BF3000FE997 /* TransmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F821ACE28289BF3000FE997 /* TransmissionTests.swift */; };
+		4F89301728411ED600B7667B /* SocrataDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F89301628411ED600B7667B /* SocrataDataSource.swift */; };
 		4F8D01192832CB0E0004EA3D /* crosswalk.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4F8D01182832CB0E0004EA3D /* crosswalk.txt */; };
 		4F8D011B283416BC0004EA3D /* Crosswalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D011A283416BC0004EA3D /* Crosswalk.swift */; };
 		4FC936BF283978BB00CC726F /* CrosswalkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC936BE283978BB00CC726F /* CrosswalkService.swift */; };
@@ -89,6 +90,7 @@
 		4F7B489C282870E10041912F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		4F821ACC28287487000FE997 /* TransmissionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionDetailsView.swift; sourceTree = "<group>"; };
 		4F821ACE28289BF3000FE997 /* TransmissionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionTests.swift; sourceTree = "<group>"; };
+		4F89301628411ED600B7667B /* SocrataDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocrataDataSource.swift; sourceTree = "<group>"; };
 		4F8D01182832CB0E0004EA3D /* crosswalk.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = crosswalk.txt; sourceTree = "<group>"; };
 		4F8D011A283416BC0004EA3D /* Crosswalk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crosswalk.swift; sourceTree = "<group>"; };
 		4FC936BE283978BB00CC726F /* CrosswalkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrosswalkService.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 		4F7B489828286F7C0041912F /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				4F89301628411ED600B7667B /* SocrataDataSource.swift */,
 				4F5F04A828257D2200FE9A1D /* CommunityData.swift */,
 				4F41D04D2829AC2500691E16 /* TransmissionData.swift */,
 				4F41D03A2828B69200691E16 /* Location.swift */,
@@ -381,6 +384,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F89301728411ED600B7667B /* SocrataDataSource.swift in Sources */,
 				4FC936BF283978BB00CC726F /* CrosswalkService.swift in Sources */,
 				4F41D0462829860C00691E16 /* SearchItem.swift in Sources */,
 				4F5F04AF2825908700FE9A1D /* CommunityDetailsView.swift in Sources */,

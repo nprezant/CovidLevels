@@ -8,11 +8,34 @@
 import Foundation
 
 fileprivate func LarimerTransmissionData(level: String, dateUpdated: Date, historical: [TransmissionData] = []) -> TransmissionData {
-    return TransmissionData(level: level, state: "Colorado", county: "Larimer County", countyFips: "08069", date: dateUpdated, percentPositiveTestsLast7Days: 7.79, newCasesPer100kLast7Days: 138.69, historical: historical)
+    var t = TransmissionData()
+    t.level = level
+    t.state = "Colorado"
+    t.county = "Larimer County"
+    t.countyFips = "08069"
+    t.date = dateUpdated
+    t.percentPositiveTestsLast7Days = 7.79
+    t.newCasesPer100kLast7Days = 138.69
+    t.historical = historical
+    return t
 }
 
 fileprivate func LarimerCommunityData(level: String, dateUpdated: Date, historical: [CommunityData] = []) -> CommunityData {
-    return CommunityData(level: level, dateUpdated: dateUpdated, county: "Larimer County", countyFips: "08069", countyPopulation: 356899, state: "Colorado", healthServiceArea: "Larimer, CO", healthServiceAreaNumber: 796, healthServiceAreaPopulation: 356899, covidCasesPer100k: 233.96, covidHospitalAdmissionsPer100k: 11.5, covidInpatientBedUtilization: 5.7, historical: historical)
+    var c = CommunityData()
+    c.level = level
+    c.dateUpdated = dateUpdated
+    c.county = "Larimer County"
+    c.countyFips = "08069"
+    c.countyPopulation = 356899
+    c.state = "Colorado"
+    c.healthServiceArea = "Larimer, CO"
+    c.healthServiceAreaNumber = 796
+    c.healthServiceAreaPopulation = 356899
+    c.covidCasesPer100k = 233.96
+    c.covidHospitalAdmissionsPer100k = 11.5
+    c.covidInpatientBedUtilization = 5.7
+    c.historical = historical
+    return c
 }
 
 extension TimeInterval {

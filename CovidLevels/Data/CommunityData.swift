@@ -8,11 +8,10 @@
 import Foundation
 import SwiftUI
 
-struct CommunityData : Identifiable, Codable {
+struct CommunityData : SocrataDataSource {
     // Data source: https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni
     // Updated weekly
-    static let apiEndpoint: String = "https://data.cdc.gov/resource/3nnm-4jni.json"
-    static let apiEndpointId: String = "3nnm-4jni"
+    static var socrataEndpointId: String = "3nnm-4jni"
     var id = UUID() // Each instance will be uniquely identifiable
     var level: String = "-" // Options: Low, Medium, High
     var dateUpdated: Date = Date.today
@@ -31,9 +30,9 @@ struct CommunityData : Identifiable, Codable {
     var levelColor: Color {
         return Color(level: level)
     }
-}
-
-extension CommunityData {
+    
+    init() {}
+    
     init(json: [String: Any]) {
         // Extract simple string data
         let state = json.extract("state")
@@ -93,7 +92,7 @@ extension CommunityData {
     }
         
     private static func requestList(state: String, county: String, completion: @escaping ([CommunityData]) -> Void) {
-        var urlComponents = URLComponents(string: CommunityData.apiEndpoint)!
+        var urlComponents = URLComponents(string: CommunityData.socrataEndpoint)!
         urlComponents.queryItems = [
             URLQueryItem(name: "state", value: state),
             URLQueryItem(name: "county", value: county),
@@ -138,7 +137,7 @@ extension CommunityData {
         DispatchQueue.global(qos: .userInitiated).async {
         
             // Name of stored data
-            let cacheName = "\(state)-\(county).cache".replacingOccurrences(of: " ", with: "-")
+            let cacheName = "\(state)-\(county)-Community.cache".replacingOccurrences(of: " ", with: "-")
             
             // Read in stored data. If there is no data stored, we'll need to update
             guard let cache : DataCache<CommunityData> = DataCacheService.getCache(cacheName) else {
@@ -151,7 +150,7 @@ extension CommunityData {
             
             // Okay, so we have some stored data. If it is up to date we can use it.
             // If it is out of date we'll need to update it.
-            EndpointStatusChecker.shared.check(id: CommunityData.apiEndpointId, against: cache.modificationDate) { status in
+            EndpointStatusChecker.shared.check(id: CommunityData.socrataEndpointId, against: cache.modificationDate) { status in
                 switch status {
                 case .UpToDate:
                     completion(cache.data)

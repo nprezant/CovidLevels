@@ -8,10 +8,10 @@
 import Foundation
 import SwiftUI
 
-struct TransmissionData : Identifiable {
+struct TransmissionData : SocrataDataSource {
     // Data source: https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-County-Level-of-Community-T/8396-v7yb
     // Updated daily
-    static let apiEndpoint: String = "https://data.cdc.gov/resource/8396-v7yb.json"
+    static var socrataEndpointId: String = "8396-v7yb"
     var id = UUID() // Each instance will be uniquely identifiable
     var level: String = "-" // Options: low, moderate, substantial, high, blank
     var state: String = "-"
@@ -36,9 +36,9 @@ struct TransmissionData : Identifiable {
         newCasesPer100kLast7Days = t.newCasesPer100kLast7Days
         historical = t.historical
     }
-}
-
-extension TransmissionData {
+    
+    init() {}
+    
     init(json: [String: Any]) {
         // Extract simple string data
         let state = json.extract("state_name")
@@ -84,7 +84,7 @@ extension TransmissionData {
     }
 
     private static func requestList(state: String, county: String, completion: @escaping ([TransmissionData]) -> Void) {
-        var urlComponents = URLComponents(string: TransmissionData.apiEndpoint)!
+        var urlComponents = URLComponents(string: TransmissionData.socrataEndpoint)!
         urlComponents.queryItems = [
             URLQueryItem(name: "state_name", value: state),
             URLQueryItem(name: "county_name", value: county),
@@ -113,7 +113,7 @@ extension TransmissionData {
         task.resume()
     }
     
-    static func request(state: String, county: String, completion: @escaping (TransmissionData) -> Void) {
+    static func requestUpdate(state: String, county: String, completion: @escaping (TransmissionData) -> Void) {
         TransmissionData.requestList(state: state, county: county) { (transmissions) in
             if transmissions.isEmpty {
                 completion(TransmissionData())
@@ -122,6 +122,37 @@ extension TransmissionData {
             var transmission = transmissions.first!
             transmission.historical = transmissions.count >= 2 ? Array(transmissions[1...]) : []
             completion(transmission)
+        }
+    }
+    
+    static func request(state: String, county: String, completion: @escaping (TransmissionData) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+        
+            // Name of stored data
+            let cacheName = "\(state)-\(county)-Transmission.cache".replacingOccurrences(of: " ", with: "-")
+            
+            // Read in stored data. If there is no data stored, we'll need to update
+            guard let cache : DataCache<TransmissionData> = DataCacheService.getCache(cacheName) else {
+                requestUpdate(state: state, county: county) { data in
+                    DataCacheService.save(data, name: cacheName)
+                    completion(data)
+                }
+                return
+            }
+            
+            // Okay, so we have some stored data. If it is up to date we can use it.
+            // If it is out of date we'll need to update it.
+            EndpointStatusChecker.shared.check(id: TransmissionData.socrataEndpointId, against: cache.modificationDate) { status in
+                switch status {
+                case .UpToDate:
+                    completion(cache.data)
+                case .OutOfDate:
+                    requestUpdate(state: state, county: county) { data in
+                        DataCacheService.save(data, name: cacheName)
+                        completion(data)
+                    }
+                }
+            }
         }
     }
 }

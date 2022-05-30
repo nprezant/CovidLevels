@@ -12,7 +12,7 @@ struct TransmissionDetailsView: View {
     let trans: TransmissionData
     var body: some View {
         LazyVGrid(columns: Array(repeating: GridItem.init(.flexible()), count: 2)) {
-            let newCases = trans.newCasesPer100kLast7Days != nil ? "\(trans.newCasesPer100kLast7Days!)" : "<10"
+            let newCases = trans.newCasesPer100kLast7Days != nil ? "\(trans.newCasesPer100kLast7Days!)" : "1-9"
             DetailItemView(name: "New cases per 100k", value: newCases)
             DetailItemView(name: "Positive tests (NAAT)", value: "\(trans.percentPositiveTestsLast7Days)%")
         }

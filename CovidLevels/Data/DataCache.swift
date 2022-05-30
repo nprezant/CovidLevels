@@ -47,3 +47,34 @@ class DataCacheService {
     }
 }
 
+// This doesn't work because the function signature in the completion seems to not be able to handle protocols :/
+//extension DataCacheService {
+//    static func sync<T: SocrataDataSource>(state: String, county: String, source: T, completion: @escaping ((T) -> Void)) {
+//        // Name of stored data
+//        let cacheName = "\(state)-\(county).cache".replacingOccurrences(of: " ", with: "-")
+//        
+//        // Read in stored data. If there is no data stored, we'll need to update
+//        guard let cache : DataCache<T> = DataCacheService.getCache(cacheName) else {
+//            T.requestUpdate(state: state, county: county) { data: T in
+//                DataCacheService.save(data, name: cacheName)
+//                completion(data)
+//            }
+//            return
+//        }
+//        
+//        // Okay, so we have some stored data. If it is up to date we can use it.
+//        // If it is out of date we'll need to update it.
+//        EndpointStatusChecker.shared.check(id: T.socrataEndpointId, against: cache.modificationDate) { status in
+//            switch status {
+//            case .UpToDate:
+//                completion(cache.data)
+//            case .OutOfDate:
+//                T.requestUpdate(state: state, county: county) { data in
+//                    DataCacheService.save(data, name: cacheName)
+//                    completion(data)
+//                }
+//            }
+//        }
+//    }
+//}
+

@@ -30,7 +30,7 @@ extension SearchItem {
     private static func queryMatches(stateSearches: [String], countySearches: [String], limit: Int, crosswalk: String?, completion: @escaping (([SearchItem]) -> Void)) {
         
         // Set up api call to find distinct states and counties
-        var urlComponents = URLComponents(string: CommunityData.apiEndpoint)!
+        var urlComponents = URLComponents(string: CommunityData.socrataEndpoint)!
         let stateQuery = stateSearches.map{"state LIKE '%\($0)%'"}.joined(separator: " OR ")
         let countyQuery = countySearches.map{"county LIKE '%\($0)%'"}.joined(separator: " OR ")
         urlComponents.queryItems = [
