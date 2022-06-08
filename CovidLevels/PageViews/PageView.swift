@@ -57,6 +57,7 @@ struct PageView: View {
                         }
                     }
                 }
+                .padding(.bottom, 100)
             }
             .padding([.top])
         }

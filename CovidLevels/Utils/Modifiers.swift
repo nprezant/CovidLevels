@@ -109,3 +109,34 @@ extension View {
         modifier(Deletable(onDelete: onDelete))
     }
 }
+
+struct FloatingButton: ViewModifier {
+    var imageSystemName: String
+    var action: (() -> Void)? = nil
+    func body(content: Content) -> some View {
+        ZStack {
+            content
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button(action: { action?() }) {
+                        Image(systemName: imageSystemName)
+                            .font(.title)
+                            .padding()
+                            .background(Color.white.opacity(1))
+                            .clipShape(Capsule())
+                    }
+                    .shadow(radius: 10)
+                }
+            }
+            .padding()
+        }
+    }
+}
+
+extension View {
+    func floatingButton(imageSystemName: String = "question.mark", action: (() -> Void)? = nil) -> some View {
+        modifier(FloatingButton(imageSystemName: imageSystemName, action: action))
+    }
+}
