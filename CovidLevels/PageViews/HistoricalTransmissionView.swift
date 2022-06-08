@@ -10,16 +10,21 @@ import SwiftUI
 struct HistoricalTransmissionView: View {
     let trans: TransmissionData
     var body: some View {
-        VStack {
-            Text("\(trans.date.formatted("EEEE"))")
+        let shortDate = trans.date.formatted(dateStyle: .short)
+        let colorHeight = "l".width(withConstrainedHeight: .greatestFiniteMagnitude, font: .preferredFont(forTextStyle: .body))
+        let colorWidth = shortDate.width(withConstrainedHeight: .greatestFiniteMagnitude, font: .preferredFont(forTextStyle: .body))
+        VStack(spacing: 0) {
+            Text(trans.date.formatted("EEEE"))
                 .font(.caption)
             Text(trans.level.uppercased())
                 .font(.body.smallCaps())
-            Text(trans.date.formatted(dateStyle: .short))
+            Text(shortDate)
                 .font(.body)
+            Rectangle()
+                .fill(trans.levelColor)
+                .frame(width: colorWidth, height: colorHeight)
         }
         .padding([.leading, .trailing])
-        .background(trans.levelColor)
     }
 }
 
