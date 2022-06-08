@@ -37,11 +37,8 @@ struct PageView: View {
                 CommunityDetailsView(comm: loc.comm)
                     .padding([.leading, .trailing, .bottom])
                     .id(loc.comm.id)
-                VStack(spacing: 0) {
-                    ForEach(loc.comm.historical) { historicalComm in
-                        HistoricalCommunityView(comm: historicalComm)
-                    }
-                }
+                HistoricalCommunityView(comms: loc.comm.historical)
+                    .padding()
                 VStack {
                     Text("Transmission Data")
                         .font(.body)
