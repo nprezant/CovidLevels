@@ -27,6 +27,7 @@ struct ContentView: View {
                     Section(header: Text(state.name)) {
                         ForEach(state.locations) { loc in
                             LocationCardView(location: loc)
+                                .contentShape(Rectangle())
                                 .onTapGesture {
                                     selectedDetail = loc
                                     withAnimation {
