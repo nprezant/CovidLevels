@@ -35,6 +35,7 @@
 		4F821ACD28287487000FE997 /* TransmissionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F821ACC28287487000FE997 /* TransmissionDetailsView.swift */; };
 		4F821ACF28289BF3000FE997 /* TransmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F821ACE28289BF3000FE997 /* TransmissionTests.swift */; };
 		4F89301728411ED600B7667B /* SocrataDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F89301628411ED600B7667B /* SocrataDataSource.swift */; };
+		4F893019285160FD00B7667B /* BulletedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F893018285160FD00B7667B /* BulletedList.swift */; };
 		4F8D01192832CB0E0004EA3D /* crosswalk.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4F8D01182832CB0E0004EA3D /* crosswalk.txt */; };
 		4F8D011B283416BC0004EA3D /* Crosswalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D011A283416BC0004EA3D /* Crosswalk.swift */; };
 		4FC936BF283978BB00CC726F /* CrosswalkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC936BE283978BB00CC726F /* CrosswalkService.swift */; };
@@ -91,6 +92,7 @@
 		4F821ACC28287487000FE997 /* TransmissionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionDetailsView.swift; sourceTree = "<group>"; };
 		4F821ACE28289BF3000FE997 /* TransmissionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionTests.swift; sourceTree = "<group>"; };
 		4F89301628411ED600B7667B /* SocrataDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocrataDataSource.swift; sourceTree = "<group>"; };
+		4F893018285160FD00B7667B /* BulletedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletedList.swift; sourceTree = "<group>"; };
 		4F8D01182832CB0E0004EA3D /* crosswalk.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = crosswalk.txt; sourceTree = "<group>"; };
 		4F8D011A283416BC0004EA3D /* Crosswalk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crosswalk.swift; sourceTree = "<group>"; };
 		4FC936BE283978BB00CC726F /* CrosswalkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrosswalkService.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				4F5F04AE2825908700FE9A1D /* CommunityDetailsView.swift */,
 				4F821ACC28287487000FE997 /* TransmissionDetailsView.swift */,
 				4F5F04B0282591B100FE9A1D /* DetailItemView.swift */,
+				4F893018285160FD00B7667B /* BulletedList.swift */,
 			);
 			path = PageViews;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				4F41D0522829D12300691E16 /* Modifiers.swift in Sources */,
 				4F41D03D2828BDA900691E16 /* StateNameUtils.swift in Sources */,
 				4F41D0412829761100691E16 /* LocationSearchView.swift in Sources */,
+				4F893019285160FD00B7667B /* BulletedList.swift in Sources */,
 				4FF01E08283B3C6A005DA1CC /* EndpointStatusChecker.swift in Sources */,
 				4F41D0482829861B00691E16 /* SearchBar.swift in Sources */,
 				4F5F043C2824537100FE9A1D /* CovidLevelsApp.swift in Sources */,

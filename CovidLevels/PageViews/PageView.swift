@@ -24,10 +24,7 @@ struct PageView: View {
             }
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading) {
-                    ForEach(String.cdcRecommendations(level: loc.comm.level), id: \.self) { recommendation in
-                        Text("- \(recommendation)")
-                            .font(.body)
-                    }
+                    BulletedList(String.cdcRecommendations(level: loc.comm.level))
                     Link("More info", destination: URL(string: "https://www.cdc.gov/coronavirus/2019-ncov/your-health/covid-by-county.html")!)
                         .font(.subheadline)
                 }
