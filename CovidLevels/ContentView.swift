@@ -11,14 +11,14 @@ struct ContentView: View {
     @StateObject var locations: Locations = .fromFile()
     
     @State var showingDetail: Bool = false
-    @State var detailIndex: Int = 0
+    @State var selectedDetail: Location? = nil
     
     @State var showingSearch: Bool = false
     
     var body: some View {
-        if showingDetail {
+        if showingDetail, let selectedDetail = selectedDetail {
             VStack {
-                PageView(loc: locations.locations[detailIndex])
+                PageView(loc: selectedDetail)
                 HStack {
                     Spacer()
                     Button(action: {
@@ -32,22 +32,36 @@ struct ContentView: View {
                 }
             }
         } else {
-            ScrollView {
-                VStack(spacing: 0) {
-                    ForEach(self.locations.locations.indices, id: \.self) { index in
-                        LocationCardView(location: self.locations.locations[index])
-                            .onTapGesture {
-                                detailIndex = index
+            ZStack {
+                List {
+                    ForEach(self.locations.states) { state in
+                        Section(header: Text(state.name)) {
+                            ForEach(state.locations) { loc in
+                                LocationCardView(location: loc)
+                                    .onTapGesture {
+                                        selectedDetail = loc
+                                        withAnimation {
+                                            showingDetail = true
+                                        }
+                                    }
+                            }
+                            .onDelete { idx in
                                 withAnimation {
-                                    showingDetail = true
+                                    let l = state.locations.enumerated().filter({idx.contains($0.offset)})
+                                    for (_,location) in l {
+                                        locations.remove(location: location)
+                                    }
                                 }
                             }
-                            .deletable() {
-                                withAnimation {
-                                    locations.remove(at: index)
-                                }
-                            }
+                        }
                     }
+                    // An empty view to give a bit of extra space at the bottom
+                    Section(header: Text("")) {
+                        EmptyView()
+                    }
+                }
+                .listStyle(.insetGrouped)
+                VStack {
                     Spacer()
                     HStack {
                         Spacer()
@@ -55,10 +69,15 @@ struct ContentView: View {
                             showingSearch = true
                         }) {
                             Image(systemName: "magnifyingglass")
+                                .font(.title)
                                 .padding()
+                                .background(Color.white.opacity(1))
+                                .clipShape(Capsule())
                         }
+                        .shadow(radius: 10)
                     }
                 }
+                .padding()
             }
             .onAppear {
                 print("Requesting all locations")

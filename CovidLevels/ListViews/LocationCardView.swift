@@ -11,6 +11,10 @@ struct LocationCardView: View {
     @ObservedObject var location: Location
     var body: some View {
         HStack {
+            let rectSize = "M".height(withConstrainedWidth: 0, font: .preferredFont(forTextStyle: .body))
+            Rectangle()
+                .fill(location.comm.levelColor)
+                .frame(width: rectSize, height: rectSize)
             Text("\(location.county.withoutCounty), \(location.state.asShortStateName)")
                 .font(.title2)
             Spacer()
@@ -18,8 +22,6 @@ struct LocationCardView: View {
                 .font(.largeTitle.smallCaps())
         }
         .foregroundColor(.primary)
-        .padding([.leading, .trailing])
-        .background(location.comm.levelColor)
     }
 }
 

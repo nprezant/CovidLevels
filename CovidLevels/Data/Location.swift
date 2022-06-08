@@ -12,21 +12,40 @@ fileprivate var locationsFileUrl: URL {
     return FileLocations.documentsFolder.appendingPathComponent("locations.json")
 }
 
+struct MajorRegion : Identifiable {
+//    static func == (lhs: MajorRegion, rhs: MajorRegion) -> Bool {
+//        return lhs.id == rhs.id && lhs.name == rhs.name
+//    }
+    
+    let id = UUID()
+    var name: String
+    var locations: [Location]
+}
+
 class Locations : ObservableObject {
-    @Published var locations: [Location] = []
+    @Published var allLocations: [Location] = []
+    @Published var states: [MajorRegion] = []
     
     func add(_ loc: Location) {
-        locations.append(loc)
+        allLocations.append(loc)
+        buildStates()
         save()
     }
     
     func remove(at index: Array.Index) {
-        locations.remove(atOffsets: IndexSet([index]))
+        allLocations.remove(atOffsets: IndexSet([index]))
+        buildStates()
+        save()
+    }
+    
+    func remove(location: Location) {
+        allLocations.removeAll(where: {$0.id == location.id})
+        buildStates()
         save()
     }
     
     func request() {
-        for loc in locations {
+        for loc in allLocations {
             loc.request()
         }
     }
@@ -34,7 +53,8 @@ class Locations : ObservableObject {
     static func fromFile() -> Locations {
         let locations: Array<Location> = .init(file: locationsFileUrl)
         let res = Locations()
-        res.locations = locations
+        res.allLocations = locations
+        res.buildStates()
         return res
     }
     
@@ -42,8 +62,13 @@ class Locations : ObservableObject {
         DispatchQueue.global(qos: .background).async { [weak self] in
             guard let self = self else { return }
             Logger().info("Saving locations")
-            self.locations.save(file: locationsFileUrl)
+            self.allLocations.save(file: locationsFileUrl)
         }
+    }
+    
+    private func buildStates() {
+        let d = Dictionary(grouping: allLocations, by: {x in return x.state}).sorted(by: {$0.key < $1.key})
+        states = d.map({MajorRegion(name: $0.key, locations: $0.value)})
     }
 }
 
@@ -89,13 +114,13 @@ extension Array where Element == Location {
         Logger().info("Loading locations from file: \(file)")
         guard let data = try? Data(contentsOf: file) else {
             Logger().info("Locations file does not exist.")
-            self.init(Locations.example.locations)
+            self.init(Locations.example.allLocations)
             return
         }
         guard let locationDataList = try? JSONDecoder().decode(Array<LocationData>.self, from: data) else {
             Logger().warning("Error decoding locations file. Removing file. Using default locations.")
             try? FileManager.default.removeItem(at: file)
-            self.init(Locations.example.locations)
+            self.init(Locations.example.allLocations)
             return
         }
         self.init(locationDataList.map{ Location(state: $0.state, county: $0.county) })
@@ -119,35 +144,37 @@ extension Array where Element == Location {
 extension Locations {
     static var example: Locations {
         let locs = Locations()
-        locs.locations = [
+        locs.allLocations = [
             Location(state: "Colorado", county: "Larimer County"),
             Location(state: "North Carolina", county: "Buncombe County")
         ]
+        locs.buildStates()
         return locs
     }
     static var exampleWithData: Locations {
         let locs = Locations()
-        locs.locations = [
+        locs.allLocations = [
             Location(state: "Colorado", county: "Larimer County"),
             Location(state: "North Carolina", county: "Buncombe County")
         ]
-        locs.locations[0].comm = CommunityData.exampleData.first!
-        locs.locations[0].trans = TransmissionData.exampleData.first!
-        locs.locations[1].comm = CommunityData.exampleData.first!
-        locs.locations[1].trans = TransmissionData.exampleData.first!
+        locs.allLocations[0].comm = CommunityData.exampleData.first!
+        locs.allLocations[0].trans = TransmissionData.exampleData.first!
+        locs.allLocations[1].comm = CommunityData.exampleData.first!
+        locs.allLocations[1].trans = TransmissionData.exampleData.first!
+        locs.buildStates()
         return locs
     }
 }
 
 extension Location {
     static var example: Location {
-        return Locations.example.locations.first!
+        return Locations.example.allLocations.first!
     }
     static var example2: Location {
-        return Locations.example.locations.last!
+        return Locations.example.allLocations.last!
     }
     static var exampleWithData: Location {
-        let loc = Locations.example.locations.first!
+        let loc = Locations.example.allLocations.first!
         loc.comm = CommunityData.exampleData.first!
         loc.trans = TransmissionData.exampleData.first!
         return loc
