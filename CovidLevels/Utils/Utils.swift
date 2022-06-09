@@ -93,35 +93,43 @@ extension Date {
     }
     
     var friendlyLastUpdatedMessage: String {
-        let justNowTolerance: TimeInterval = .minutes(1)
-        let longTimeAgo: TimeInterval = .weeks(2)
-        let delta = timeIntervalSinceNow
+        let justNowTolerance: TimeInterval = 60 // seconds
+        let longTimeAgo: TimeInterval = .weeks(4)
+        let delta = -1 * timeIntervalSinceNow
         
         // Handle special cases
-        if delta <= justNowTolerance {
+        if delta < justNowTolerance {
             return "just now"
-        } else if delta >= longTimeAgo {
+        } else if delta > longTimeAgo {
             return "a long time ago"
         }
         
         // Handle minutes, hours, days, weeks
-        if delta < .hours(1) {
-            let minutes = delta.truncatingRemainder(dividingBy: .minutes(1))
-            return "\(minutes) minute\(minutes.plurality) ago"
+        let count: TimeInterval
+        let unit: String
+        if delta < .minutes(1) {
+            count = delta
+            unit = "second"
+        } else if delta < .hours(1) {
+            count = delta / .minutes(1)
+            unit = "minute"
         } else if delta < .days(1) {
-            let hours = delta.truncatingRemainder(dividingBy: .hours(1))
-            return "\(hours) hour\(hours.plurality) ago"
+            count = delta / .hours(1)
+            unit = "hour"
         } else if delta < .weeks(1) {
-            let days = delta.truncatingRemainder(dividingBy: .days(1))
-            return "\(days) day\(days.plurality) ago"
+            count = delta / .days(1)
+            unit = "day"
         } else {
-            let weeks = delta.truncatingRemainder(dividingBy: .weeks(1))
-            return "\(weeks) week\(weeks.plurality) ago"
+            count = delta / .weeks(1)
+            unit = "week"
         }
+        
+        let shortenedCount = Int(count)
+        return "\(shortenedCount) \(unit)\(shortenedCount.plurality) ago"
     }
 }
 
-extension TimeInterval {
+extension Int {
     var plurality: String {
         return self == 1 ? "" : "s"
     }

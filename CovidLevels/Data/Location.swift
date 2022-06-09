@@ -21,7 +21,6 @@ struct MajorRegion : Identifiable {
 class Locations : ObservableObject {
     @Published var allLocations: [Location] = []
     @Published var states: [MajorRegion] = []
-    @Published var lastChecked: Date? = nil
     
     func add(_ loc: Location) {
         allLocations.append(loc)
@@ -42,7 +41,6 @@ class Locations : ObservableObject {
     }
     
     func request() {
-        lastChecked = Date.now
         for loc in allLocations {
             loc.request()
         }
