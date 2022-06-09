@@ -10,11 +10,21 @@ import Foundation
 class EndpointStatusChecker {
     
     static let shared = EndpointStatusChecker()
-    private init() {}
+    private init() {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self = self else { return }
+            self.start()
+        }
+    }
+    
+    private var isStarting: Bool = false
+    private var isStarted: Bool = false
+    private var isChecking: Bool = false
+    private var toCheck: [CheckItem] = []
     
     private var endpoints: [String:EndpointStatus] = [:]
     private static let url = FileLocations.documentsFolder.appendingPathComponent("endpointStatus.json")
-    private static let minCheckInterval: TimeInterval = .minutes(5)
+    private static let minCheckInterval: TimeInterval = .minutes(10)
     
     enum StatusCode {
         case UpToDate
@@ -27,54 +37,88 @@ class EndpointStatusChecker {
         let lastChecked: Date
     }
     
+    struct CheckItem {
+        let id: String
+        let against: Date
+        let completion: ((StatusCode) -> Void)
+    }
+    
+    private func start() {
+        isStarting = true
+        endpoints = loadJson(url: EndpointStatusChecker.url, type: Dictionary<String,EndpointStatus>.self) ?? [:]
+        isStarting = false
+        isStarted = true
+    }
+    
     func check(id: String, against date: Date, completion: @escaping ((StatusCode) -> Void)) {
-        check(id: id) { status in
-            // If no status can be found, this is a programming error. Assume out of date.
-            guard let status = status else {
-                print("No endpoint status could be found for id \(id)")
-                completion(.OutOfDate)
-                return
-            }
-            
-            // If the endpoint was updated more recently than the date we're comparing against, we're out of date.
-            if status.lastUpdated.timeIntervalSince1970 > date.timeIntervalSince1970 {
-                completion(.OutOfDate)
-            } else {
-                completion(.UpToDate)
-            }
+        check(CheckItem(id: id, against: date, completion: completion))
+    }
+    
+    func check(_ item: CheckItem) {
+        toCheck.append(item)
+        
+        if isStarted && !isChecking {
+            emptyQueue()
         }
     }
     
-    func check(id: String, completion: @escaping ((EndpointStatus?) -> Void)) {
-        // Load endpoints if needed
-        if endpoints.isEmpty {
-            endpoints = loadJson(url: EndpointStatusChecker.url, type: Dictionary<String,EndpointStatus>.self) ?? [:]
+    private func emptyQueue() {
+        if toCheck.isEmpty {
+            return
         }
         
+        isChecking = true
+        
+        DispatchQueue.global(qos: .userInitiated).async { [self] in
+            while !toCheck.isEmpty {
+                let checkItem = toCheck.remove(at: 0)
+                checkCore(checkItem)
+            }
+            isChecking = false
+        }
+    }
+        
+    private func checkCore(_ item: CheckItem) {
+        guard let status = check(id: item.id) else {
+        // If no status can be found, this is a programming error. Assume out of date.
+            print("No endpoint status could be found for id \(item.id)")
+            item.completion(.OutOfDate)
+            return
+        }
+        
+        // If the endpoint was updated more recently than the date we're comparing against, we're out of date.
+        if status.lastUpdated.timeIntervalSince1970 > item.against.timeIntervalSince1970 {
+            item.completion(.OutOfDate)
+        } else {
+            item.completion(.UpToDate)
+        }
+    }
+    
+    private func check(id: String) -> EndpointStatus? {
         // If this endpoint is already known and it has been checked recently, there is no need to do anything
         if let endpoint = endpoints[id] {
             if endpoint.lastChecked.timeIntervalSinceNow > -EndpointStatusChecker.minCheckInterval {
-                print("Endpoint \(id) checked recently. No need to re-check.")
-                completion(endpoint)
-                return
+                print("Endpoint \(id) checked for update recently. Not re-checking.")
+                return endpoint
+            } else {
+                print("Endpoint \(id) not checked for update recently. Re-checking.")
             }
         }
 
         // The endpoint is not known or it hasn't been checked in a while. Required to check the server.
-        checkLastServerUpdate(id: id) { [self] date in
-            print("Rechecked endpoint \(id) status. Last updated \(String(describing: date))")
-            guard let date = date else {
-                completion(nil)
-                return
-            }
-            let ep = EndpointStatus(id: id, lastUpdated: date, lastChecked: Date.now)
-            endpoints[id] = ep
-            save()
-            completion(ep)
+        guard let date = checkLastServerUpdate(id: id) else {
+            print("No date found from server for endpoint \(id)")
+            return nil
         }
+        
+        print("Endpoint \(id) was last updated: \(date)")
+        let ep = EndpointStatus(id: id, lastUpdated: date, lastChecked: Date.now)
+        endpoints[id] = ep
+        save()
+        return ep
     }
     
-    private func checkLastServerUpdate(id: String, completion: @escaping ((Date?) -> Void)) {
+    private func checkLastServerUpdate(id: String) -> Date? {
         var urlComponents = URLComponents(string: "https://api.us.socrata.com/api/catalog/v1")!
         urlComponents.queryItems = [
             URLQueryItem(name: "ids", value: id),
@@ -83,21 +127,31 @@ class EndpointStatusChecker {
         
         var request = URLRequest(url: url)
         request.setSocrataHeader()
+        
+        // Set up dispatch group to allow waiting for the url request to complete
+        let group = DispatchGroup()
+        group.enter()
+        
+        var endpointLastUpdate: Date? = nil
 
         let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
-            
             if let data = data,
                let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                let results = json["results"] as? Array<[String: Any]>,
                let resource = results.first?["resource"] as? [String: Any],
                let updatedAt = resource["updatedAt"] as? String {
-                completion(Date.fromSocrataFloatingTimestamp(updatedAt))
-            } else {
-                completion(nil)
+                endpointLastUpdate = Date.fromSocrataFloatingTimestamp(updatedAt)
             }
+            group.leave()
         }
 
+        // Begin task
         task.resume()
+
+        // Wait for task to complete
+        group.wait()
+        
+        return endpointLastUpdate
     }
     
     private func save() {
