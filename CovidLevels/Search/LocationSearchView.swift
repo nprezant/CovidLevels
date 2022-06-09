@@ -16,6 +16,8 @@ struct LocationSearch: View {
     @State private var showingPreview: Bool = false
     @State private var previewLocation: Location? = nil
     
+    @State private var showingKeyboard: Bool = true
+    
     func updateSearchItems(_ searchText: String) {
         SearchItem.provider(searchText: searchText) { items in
             print("Applying \(items.count) items to suggestions")
@@ -28,7 +30,7 @@ struct LocationSearch: View {
             Text("Enter U.S. state or county location")
                 .font(.caption)
                 .padding([.top])
-            SearchBar(text: $searchText)
+            SearchBar(text: $searchText, isFirstResponder: showingKeyboard)
                 .onChange(of: searchText) { s in updateSearchItems(s) }
             ScrollView {
                 ForEach(searchItems) { item in
