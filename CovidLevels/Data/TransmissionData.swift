@@ -83,7 +83,7 @@ struct TransmissionData : SocrataDataSource {
         self.historical = [] // Not handled by the json reader. The json reader just reads a single instance.
     }
 
-    private static func requestList(state: String, county: String, completion: @escaping ([TransmissionData]) -> Void) {
+    private static func requestList(state: String, county: String) -> [TransmissionData] {
         var urlComponents = URLComponents(string: TransmissionData.socrataEndpoint)!
         urlComponents.queryItems = [
             URLQueryItem(name: "state_name", value: state),
@@ -95,9 +95,12 @@ struct TransmissionData : SocrataDataSource {
         
         var request = URLRequest(url: url)
         request.setSocrataHeader()
+        
+        let group = DispatchGroup()
+        group.enter()
+        var transmissions: [TransmissionData] = []
 
         let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
-            var transmissions: [TransmissionData] = []
             
             if let data = data,
                let json = try? JSONSerialization.jsonObject(with: data, options: []) as? Array<[String: Any]> {
@@ -107,22 +110,22 @@ struct TransmissionData : SocrataDataSource {
                 }
             }
             
-            completion(transmissions)
+            group.leave()
         }
 
         task.resume()
+        group.wait()
+        return transmissions
     }
     
-    static func requestUpdate(state: String, county: String, completion: @escaping (TransmissionData) -> Void) {
-        TransmissionData.requestList(state: state, county: county) { (transmissions) in
-            if transmissions.isEmpty {
-                completion(TransmissionData())
-                return
-            }
-            var transmission = transmissions.first!
-            transmission.historical = Array(transmissions)
-            completion(transmission)
+    static func requestUpdate(state: String, county: String) -> TransmissionData? {
+        let transmissions = TransmissionData.requestList(state: state, county: county)
+        if transmissions.isEmpty {
+            return nil
         }
+        var transmission = transmissions.first!
+        transmission.historical = Array(transmissions)
+        return transmission
     }
     
     static func request(state: String, county: String, completion: @escaping (TransmissionData) -> Void) {
@@ -131,26 +134,33 @@ struct TransmissionData : SocrataDataSource {
             // Name of stored data
             let cacheName = "\(state)-\(county)-Transmission.cache".replacingOccurrences(of: " ", with: "-")
             
-            // Read in stored data. If there is no data stored, we'll need to update
+            // If there is no data already stored, we'll need to read in new data
             guard let cache : DataCache<TransmissionData> = DataCacheService.getCache(cacheName) else {
-                requestUpdate(state: state, county: county) { data in
-                    DataCacheService.save(data, name: cacheName)
+                if let data = requestUpdate(state: state, county: county) {
+                    DataCacheService.save(data, name: cacheName) // only save if data is found
                     completion(data)
                 }
                 return
             }
             
-            // Okay, so we have some stored data. If it is up to date we can use it.
-            // If it is out of date we'll need to update it.
+            // Okay, so we have some stored data. Display it.
+            // If there is no internet connection old data is better than no data.
+            completion(cache.data)
+            
+            // Check for an update.
+            // If cached data is up to date we can use it.
+            // Otherwise we'll need to fetch the update.
             EndpointStatusChecker.shared.check(id: TransmissionData.socrataEndpointId, against: cache.modificationDate) { status in
                 switch status {
                 case .UpToDate:
-                    completion(cache.data)
+                    // Pass. Stored data is already displayed.
+                    break
                 case .OutOfDate:
-                    requestUpdate(state: state, county: county) { data in
+                    if let data = requestUpdate(state: state, county: county) {
                         DataCacheService.save(data, name: cacheName)
                         completion(data)
                     }
+                    break
                 }
             }
         }
