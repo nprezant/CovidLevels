@@ -54,7 +54,7 @@ class EndpointStatusChecker {
         check(CheckItem(id: id, against: date, completion: completion))
     }
     
-    func check(_ item: CheckItem) {
+    private func check(_ item: CheckItem) {
         toCheck.append(item)
         
         if isStarted && !isChecking {
@@ -81,7 +81,7 @@ class EndpointStatusChecker {
     private func checkCore(_ item: CheckItem) {
         guard let status = check(id: item.id) else {
         // If no status can be found, this is a programming error. Assume out of date.
-            print("No endpoint status could be found for id \(item.id)")
+            print("Endpoint \(item.id) status not found")
             item.completion(.OutOfDate)
             return
         }

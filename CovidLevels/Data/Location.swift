@@ -13,10 +13,6 @@ fileprivate var locationsFileUrl: URL {
 }
 
 struct MajorRegion : Identifiable {
-//    static func == (lhs: MajorRegion, rhs: MajorRegion) -> Bool {
-//        return lhs.id == rhs.id && lhs.name == rhs.name
-//    }
-    
     let id = UUID()
     var name: String
     var locations: [Location]
@@ -25,6 +21,7 @@ struct MajorRegion : Identifiable {
 class Locations : ObservableObject {
     @Published var allLocations: [Location] = []
     @Published var states: [MajorRegion] = []
+    @Published var lastChecked: Date? = nil
     
     func add(_ loc: Location) {
         allLocations.append(loc)
@@ -45,6 +42,7 @@ class Locations : ObservableObject {
     }
     
     func request() {
+        lastChecked = Date.now
         for loc in allLocations {
             loc.request()
         }
@@ -89,14 +87,12 @@ class Location : Identifiable, ObservableObject {
     func request() {
         CommunityData.request(state: state, county: county) { [weak self] community in
             guard let self = self else { return }
-//            print("Got community data. \(self.county), \(self.state): \(community.level)")
             DispatchQueue.main.async {
                 self.comm = community
             }
         }
         TransmissionData.request(state: state, county: county) { [weak self] transmission in
             guard let self = self else { return }
-//            print("Got transmission data. \(self.county), \(self.state): \(transmission.level)")
             DispatchQueue.main.async {
                 self.trans = transmission
             }

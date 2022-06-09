@@ -92,8 +92,38 @@ extension Date {
         return calendar.date(from: components)!
     }
     
-    func isOutOfDate(with other: Date) {
+    var friendlyLastUpdatedMessage: String {
+        let justNowTolerance: TimeInterval = .minutes(1)
+        let longTimeAgo: TimeInterval = .weeks(2)
+        let delta = timeIntervalSinceNow
         
+        // Handle special cases
+        if delta <= justNowTolerance {
+            return "just now"
+        } else if delta >= longTimeAgo {
+            return "a long time ago"
+        }
+        
+        // Handle minutes, hours, days, weeks
+        if delta < .hours(1) {
+            let minutes = delta.truncatingRemainder(dividingBy: .minutes(1))
+            return "\(minutes) minute\(minutes.plurality) ago"
+        } else if delta < .days(1) {
+            let hours = delta.truncatingRemainder(dividingBy: .hours(1))
+            return "\(hours) hour\(hours.plurality) ago"
+        } else if delta < .weeks(1) {
+            let days = delta.truncatingRemainder(dividingBy: .days(1))
+            return "\(days) day\(days.plurality) ago"
+        } else {
+            let weeks = delta.truncatingRemainder(dividingBy: .weeks(1))
+            return "\(weeks) week\(weeks.plurality) ago"
+        }
+    }
+}
+
+extension TimeInterval {
+    var plurality: String {
+        return self == 1 ? "" : "s"
     }
 }
 

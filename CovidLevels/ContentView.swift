@@ -45,6 +45,9 @@ struct ContentView: View {
                         }
                     }
                 }
+                Section(header: HStack { Spacer(); Text("Last checked \(locations.lastChecked?.friendlyLastUpdatedMessage ?? "unknown")") }) {
+                    EmptyView()
+                }
                 // An empty view to give a bit of extra space at the bottom
                 Section(header: Text("")) {
                     EmptyView()
