@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var locations: Locations = .fromFile()
-    @StateObject var lastUpdate: LastUpdatedService = .init()
+    @StateObject var lastUpdate: LastUpdatedService = .shared
     
     @State var showingDetail: Bool = false
     @State var selectedDetail: Location? = nil
@@ -60,7 +60,6 @@ struct ContentView: View {
             }
             .onAppear {
                 print("Requesting all locations")
-                lastUpdate.registerChange()
                 locations.request()
             }
             .sheet(isPresented: $showingSearch, onDismiss: { print("Search dismissed") }) {

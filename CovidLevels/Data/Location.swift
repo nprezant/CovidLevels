@@ -22,6 +22,10 @@ class Locations : ObservableObject {
     @Published var allLocations: [Location] = []
     @Published var states: [MajorRegion] = []
     
+    private var timer: Timer? = nil
+    private var lastUpdate: LastUpdatedService = .shared
+    static private let staleTolerance: TimeInterval = .minutes(30)
+    
     func add(_ loc: Location) {
         allLocations.append(loc)
         buildStates()
@@ -40,7 +44,24 @@ class Locations : ObservableObject {
         save()
     }
     
+    func requestIfStale() {
+        var isStale: Bool = true
+        if let lastChecked = lastUpdate.lastUpdatedDate {
+            let timeSinceLastChecked = -1 * lastChecked.timeIntervalSinceNow
+            if timeSinceLastChecked > Locations.staleTolerance {
+                isStale = false
+            }
+        }
+        if isStale {
+            request()
+        }
+    }
+    
     func request() {
+        lastUpdate.registerChange()
+        if timer == nil {
+            timer = .scheduledTimer(withTimeInterval: .minutes(15), repeats: true, block: {_ in self.requestIfStale()})
+        }
         for loc in allLocations {
             loc.request()
         }

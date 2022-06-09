@@ -9,8 +9,11 @@ import Foundation
 
 class LastUpdatedService : ObservableObject {
     @Published var lastUpdatedMessage: String = "unknown"
-    private var lastUpdatedDate: Date? = nil
+    var lastUpdatedDate: Date? = nil
     private var timer: Timer? = nil
+    
+    static let shared = LastUpdatedService()
+    private init() {}
     
     func registerChange() {
         lastUpdatedDate = Date.now
