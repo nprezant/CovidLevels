@@ -20,7 +20,9 @@ struct ContentView: View {
         if showingDetail, let selectedDetail = selectedDetail {
             PageView(loc: selectedDetail)
                 .floatingButton(imageSystemName: "list.bullet") {
-                    showingDetail = false
+                    withAnimation {
+                        showingDetail = false
+                    }
                 }
         } else {
             List {
