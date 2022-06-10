@@ -47,6 +47,10 @@ struct LocationSearch: View {
             // https://developer.apple.com/forums/thread/652080
             let _ = "\(previewLocation?.state ?? "none")"
         }
+        .onAppear {
+            // Startup the crosswalk service before the user starts typing
+            let _ = CrosswalkService.shared
+        }
         .sheet(isPresented: $showingPreview, onDismiss: { print("Location preview dismissed") }) {
             if let previewLocation = previewLocation {
                 ZStack {

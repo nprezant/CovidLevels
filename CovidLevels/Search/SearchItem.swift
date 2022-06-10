@@ -61,9 +61,7 @@ extension SearchItem {
     
     static let searchListLength: Int = 12
     
-    static func provider(searchText: String, completion: @escaping (([SearchItem]) -> Void)) {
-        CrosswalkService.shared.start()
-        
+    static func provider(searchText: String, completion: @escaping (([SearchItem]) -> Void)) {        
         // When no text is provided, provide no suggestions
         if searchText.isEmpty || searchText.count < 2 {
             completion([])

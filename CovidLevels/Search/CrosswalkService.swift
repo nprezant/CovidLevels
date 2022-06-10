@@ -9,7 +9,12 @@ import Foundation
 
 class CrosswalkService {
     static let shared = CrosswalkService()
-    private init() {}
+    private init() {
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            self.start()
+        }
+    }
     
     private var isStarting: Bool = false
     private var isStarted: Bool = false
@@ -17,14 +22,12 @@ class CrosswalkService {
     private var toSearch: SearchTerm? = nil
     private var crosswalkRows: [Crosswalk] = []
     
-    func start() {
+    private func start() {
         if isStarted || isStarting { return }
         isStarting = true
-        DispatchQueue.global(qos: .userInitiated).async { [self] in
-            crosswalkRows = readCrosswalkFile()
-            isStarted = true
-            findFromQueue()
-        }
+        crosswalkRows = readCrosswalkFile()
+        isStarted = true
+        findFromQueue()
     }
     
 //    struct SearchTerm {

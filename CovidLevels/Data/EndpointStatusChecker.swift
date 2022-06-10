@@ -48,6 +48,7 @@ class EndpointStatusChecker {
         endpoints = loadJson(url: EndpointStatusChecker.url, type: Dictionary<String,EndpointStatus>.self) ?? [:]
         isStarting = false
         isStarted = true
+        emptyQueue()
     }
     
     func check(id: String, against date: Date, completion: @escaping ((StatusCode) -> Void)) {
