@@ -40,7 +40,9 @@ class Locations : ObservableObject {
     
     func remove(location: Location) {
         allLocations.removeAll(where: {$0.id == location.id})
-        buildStates()
+        for i in 1..<states.count {
+            states[i].locations.removeAll(where: {$0.id == location.id})
+        }
         save()
     }
     
