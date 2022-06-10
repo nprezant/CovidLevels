@@ -129,13 +129,13 @@ extension Array where Element == Location {
         Logger().info("Loading locations from file: \(file)")
         guard let data = try? Data(contentsOf: file) else {
             Logger().info("Locations file does not exist.")
-            self.init(Locations.example.allLocations)
+            self.init(Locations.appDefault.allLocations)
             return
         }
         guard let locationDataList = try? JSONDecoder().decode(Array<LocationData>.self, from: data) else {
             Logger().warning("Error decoding locations file. Removing file. Using default locations.")
             try? FileManager.default.removeItem(at: file)
-            self.init(Locations.example.allLocations)
+            self.init(Locations.appDefault.allLocations)
             return
         }
         self.init(locationDataList.map{ Location(state: $0.state, county: $0.county) })
@@ -162,6 +162,16 @@ extension Locations {
         locs.allLocations = [
             Location(state: "Colorado", county: "Larimer County"),
             Location(state: "North Carolina", county: "Buncombe County")
+        ]
+        locs.buildStates()
+        return locs
+    }
+    static var appDefault: Locations {
+        let locs = Locations()
+        locs.allLocations = [
+            Location(state: "Colorado", county: "Arapahoe County"),
+            Location(state: "Colorado", county: "El Paso County"),
+            Location(state: "Colorado", county: "Routt County")
         ]
         locs.buildStates()
         return locs
