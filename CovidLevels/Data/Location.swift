@@ -169,9 +169,10 @@ extension Locations {
     static var appDefault: Locations {
         let locs = Locations()
         locs.allLocations = [
-            Location(state: "Colorado", county: "Arapahoe County"),
-            Location(state: "Colorado", county: "El Paso County"),
-            Location(state: "Colorado", county: "Routt County")
+            Location(state: "California", county: "Los Angeles County"),
+            Location(state: "California", county: "Orange County"),
+            Location(state: "Florida", county: "Miami-Dade County"),
+            Location(state: "Florida", county: "Palm Beach County"),
         ]
         locs.buildStates()
         return locs
