@@ -27,7 +27,7 @@ class Locations : ObservableObject {
     static private let staleTolerance: TimeInterval = .minutes(30)
     
     func add(_ loc: Location) {
-        allLocations.append(loc)
+        allLocations = (allLocations + [loc]).sorted(by: {$0.county < $1.county})
         buildStates()
         save()
     }
