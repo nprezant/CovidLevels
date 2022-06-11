@@ -19,7 +19,7 @@ class CrosswalkService {
     private var isStarting: Bool = false
     private var isStarted: Bool = false
     private var isSearching: Bool = false
-    private var toSearch: SearchTerm? = nil
+    private var toSearch: [SearchTerm] = []
     private var crosswalkRows: [Crosswalk] = []
     
     private func start() {
@@ -27,27 +27,8 @@ class CrosswalkService {
         isStarting = true
         crosswalkRows = readCrosswalkFile()
         isStarted = true
-        findFromQueue()
+        emptyQueue()
     }
-    
-//    struct SearchTerm {
-//        let regex: String
-//        let limit: Int
-//        let compareWith: ((Crosswalk) -> [String]) // Values in the crosswalk to compare to
-//        let completion: (([Crosswalk]) -> Void)
-//
-//        init(text: String, type: SearchType, limit: Int, completion: @escaping (([Crosswalk]) -> Void)) {
-//            let (regex, compareWith) = type.info(text: text)
-//            self.regex = regex
-//            self.limit = limit
-//            self.compareWith = compareWith
-//            self.completion = completion
-//        }
-//    }
-//
-//    func find(text: String, type: SearchType, limit: Int, completion: @escaping (([Crosswalk]) -> Void)) {
-//        find(SearchTerm(text: text, type: type, limit: limit, completion: completion))
-//    }
     
     struct SearchTerm {
         let text: String
@@ -60,40 +41,28 @@ class CrosswalkService {
         find(SearchTerm(text: text, types: types, limit: limit, completion: completion))
     }
     
-//    struct SearchTerm {
-//        let text: String
-//        let types: SearchVariables
-//        let limit: Int
-//        let completion: (([Crosswalk]) -> Void)
-//
-//        init(text: String, types: SearchVariables, limit: Int, completion: @escaping (([Crosswalk]) -> Void)) {
-//            self.text = text
-//            self.limit = limit
-//            self.types = types
-//            self.completion = completion
-//        }
-//    }
-//
-//    func find(text: String, types: SearchVariables, limit: Int, completion: @escaping (([Crosswalk]) -> Void)) {
-//        find(SearchTerm(text: text, types: types, limit: limit, completion: completion))
-//    }
-    
     func find(_ st: SearchTerm) {
         // Cannot start a find operation if no data is loaded or if service is currently finding something else
         // Instead, queue the search to be looked at next
-        if !isStarted || isSearching {
-            print("Queueing search term. Search is currently running or service is stopped.")
-            toSearch = st
+        if toSearch.isEmpty { toSearch.append(st) }
+        else { toSearch[0] = st }
+        emptyQueue()
+    }
+    
+    private func emptyQueue() {
+        if !isStarted && isSearching || toSearch.isEmpty {
             return
         }
         
         isSearching = true
         
         DispatchQueue.global(qos: .userInitiated).async { [self] in
-            let found = findCore(st)
+            while !toSearch.isEmpty {
+                let st = toSearch.remove(at: 0)
+                let found = findCore(st)
+                st.completion(Array(found))
+            }
             isSearching = false
-            st.completion(Array(found))
-            findFromQueue()
         }
     }
     
@@ -114,13 +83,6 @@ class CrosswalkService {
             }
         }
         return found
-    }
-    
-    private func findFromQueue() {
-        if let st = toSearch {
-            toSearch = nil
-            find(st)
-        }
     }
     
     enum SearchType : Int {

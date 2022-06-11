@@ -57,14 +57,11 @@ class EndpointStatusChecker {
     
     private func check(_ item: CheckItem) {
         toCheck.append(item)
-        
-        if isStarted && !isChecking {
-            emptyQueue()
-        }
+        emptyQueue()
     }
     
     private func emptyQueue() {
-        if toCheck.isEmpty {
+        if !isStarted || isChecking || toCheck.isEmpty {
             return
         }
         

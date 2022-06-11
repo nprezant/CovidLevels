@@ -71,7 +71,7 @@ extension SearchItem {
         print("Searching \(searchText)")
         
         // If the search text appears to be a city or zip code, figure out which counties / states that would correspond to
-        let isPossibleZipCode = searchText.matches(regex: "\\d{3,5}")
+        let isPossibleZipCode = searchText.matches(regex: "\\d{2,4}")
         let isPossibleCity = searchText.matches(regex: "^[^0-9]+$")
         
         // If this looks like a zip code, don't try to treat it as a state or county
