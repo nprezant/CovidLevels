@@ -16,6 +16,7 @@ class Crosswalk : Hashable, Equatable {
     let placeName: String
     let zctaName: String
     let county: String
+    let longSearch: String
     
     var foundWith: String? = nil
     
@@ -67,6 +68,8 @@ class Crosswalk : Hashable, Equatable {
             self.placeName = placeName
             self.zctaName = zctaName
             self.county = county
+            
+            self.longSearch = "\(countyName) \(placeName) \(zctaName) \(zctaCode) \(stateAbbreviation.asLongStateName)"
         } else {
             print("Error decoding crosswalk line: \(line)")
             return nil

@@ -32,13 +32,12 @@ class CrosswalkService {
     
     struct SearchTerm {
         let text: String
-        let types: Set<SearchType>
         let limit: Int
         let completion: (([Crosswalk]) -> Void)
     }
 
-    func find(text: String, types: Set<SearchType>, limit: Int, completion: @escaping (([Crosswalk]) -> Void)) {
-        find(SearchTerm(text: text, types: types, limit: limit, completion: completion))
+    func find(text: String, limit: Int, completion: @escaping (([Crosswalk]) -> Void)) {
+        find(SearchTerm(text: text, limit: limit, completion: completion))
     }
     
     func find(_ st: SearchTerm) {
@@ -68,20 +67,13 @@ class CrosswalkService {
     
     private func findCore(_ st: SearchTerm) -> Set<Crosswalk> {
         var found: Set<Crosswalk> = []
-        let infos = st.types.map{ $0.info(text: st.text) }
+        var scores: [Int] = []
+        
         for cw in crosswalkRows {
-            let compareData = infos.map { ($0.getCompareField(cw), $0.regex, $0.includeCrosswalk) }
-            let matches = compareData.filter{ field, regex, _ in field.matches(regex: regex, options: .caseInsensitive) }
-            if !matches.isEmpty {
-                let (success, item) = found.insert(cw)
-                if success, let match = matches.first {
-                    item.foundWith = match.2 ? match.0 : nil
-                }
-                if found.count >= st.limit {
-                    break
-                }
-            }
+            let rating = cw.longSearch.rateMatch(text: st.text)
         }
+        
+        // need to track ratings alongside the actual row, keep the top few rows
         return found
     }
     

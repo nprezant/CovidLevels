@@ -160,6 +160,26 @@ extension String {
     }
 }
 
+extension String {
+    func rateMatch(text: String) -> Int {
+        let x = text.lowercased()
+        let y = self.lowercased()
+        
+        var ratings = [Int](repeating: 0, count: x.count * y.count)
+        
+        for i in 0..<x.count {
+            for j in 0..<y.count {
+                if x[i] == y[i] {
+                    let index = i * x.count + j
+                    ratings[index] = index % x.count == 0 ? 0 : ratings[index - 1]
+                }
+            }
+        }
+        
+        return ratings.reduce(0, +)
+    }
+}
+
 extension StringProtocol {
     func index<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> Index? {
         range(of: string, options: options)?.lowerBound

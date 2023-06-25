@@ -70,29 +70,11 @@ extension SearchItem {
         
         print("Searching \(searchText)")
         
-        // If the search text appears to be a city or zip code, figure out which counties / states that would correspond to
+        // Show the zip code if helpful.
         let isPossibleZipCode = searchText.matches(regex: "\\d{2,4}")
-        let isPossibleCity = searchText.matches(regex: "^[^0-9]+$")
         
-        // If this looks like a zip code, don't try to treat it as a state or county
-        if isPossibleZipCode {
-            CrosswalkService.shared.find(text: searchText, types: [.zip], limit: searchListLength) { zipCodeMatches in
-                completion(zipCodeMatches.asSearchItems)
-            }
-            return
-        }
-        
-        // Try to match on the city name
-        if isPossibleCity {
-            CrosswalkService.shared.find(text: searchText, types: [.city, .county], limit: searchListLength) { matches in
-                completion(matches.asSearchItems)
-            }
-            return
-        }
-        
-        // This shouldn't happen, but just search for county as a backup
-        CrosswalkService.shared.find(text: searchText, types: [.county], limit: searchListLength) { countyMatches in
-            completion(countyMatches.asSearchItems)
+        CrosswalkService.shared.find(text: searchText, limit: searchListLength) { matches in
+            completion(matches.asSearchItems)
         }
     }
 }
